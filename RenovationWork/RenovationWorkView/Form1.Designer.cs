@@ -1,5 +1,5 @@
 ﻿
-namespace RenovationWork
+namespace RenovationWorkView
 {
     partial class Form1
     {
