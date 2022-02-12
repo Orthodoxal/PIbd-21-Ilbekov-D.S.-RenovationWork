@@ -6,4 +6,13 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RenovationWorkBusinessLogic\RenovationWorkBusinessLogic.csproj" />
+    <ProjectReference Include="..\RenovationWorkListImplement\RenovationWorkListImplement.csproj" />
+  </ItemGroup>
+
 </Project>
