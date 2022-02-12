@@ -30,28 +30,28 @@ namespace RenovationWorkView
             List<RepairViewModel> list = _logicR.Read(null);
             if (list != null)
             {
-                comboBoxProduct.DisplayMember = "RepairName";
-                comboBoxProduct.ValueMember = "Id";
-                comboBoxProduct.DataSource = list;
-                comboBoxProduct.SelectedItem = null;
+                comboBoxRepair.DisplayMember = "RepairName";
+                comboBoxRepair.ValueMember = "Id";
+                comboBoxRepair.DataSource = list;
+                comboBoxRepair.SelectedItem = null;
             }
         }
 
         private void CalcSum()
         {
-            if (comboBoxProduct.SelectedValue != null &&
+            if (comboBoxRepair.SelectedValue != null &&
            !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
-                    int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    RepairViewModel product = _logicR.Read(new RepairBindingModel
+                    int id = Convert.ToInt32(comboBoxRepair.SelectedValue);
+                    RepairViewModel repair = _logicR.Read(new RepairBindingModel
                     {
                         Id
                     = id
                     })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * repair?.Price ?? 0).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -66,7 +66,7 @@ namespace RenovationWorkView
         {
             CalcSum();
         }
-        private void ComboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxRepair_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
         }
@@ -79,7 +79,7 @@ namespace RenovationWorkView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxProduct.SelectedValue == null)
+            if (comboBoxRepair.SelectedValue == null)
             {
                 MessageBox.Show("Choose Repair", "Error", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -89,7 +89,7 @@ namespace RenovationWorkView
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
-                    RepairId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    RepairId = Convert.ToInt32(comboBoxRepair.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });

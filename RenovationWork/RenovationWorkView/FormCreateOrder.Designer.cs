@@ -32,7 +32,7 @@ namespace RenovationWorkView
             this.labelRepair = new System.Windows.Forms.Label();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
-            this.comboBoxProduct = new System.Windows.Forms.ComboBox();
+            this.comboBoxRepair = new System.Windows.Forms.ComboBox();
             this.labelAmount = new System.Windows.Forms.Label();
             this.labelTotal = new System.Windows.Forms.Label();
             this.textBoxCount = new System.Windows.Forms.TextBox();
@@ -71,12 +71,12 @@ namespace RenovationWorkView
             // 
             // comboBoxProduct
             // 
-            this.comboBoxProduct.FormattingEnabled = true;
-            this.comboBoxProduct.Location = new System.Drawing.Point(147, 12);
-            this.comboBoxProduct.Name = "comboBoxProduct";
-            this.comboBoxProduct.Size = new System.Drawing.Size(225, 23);
-            this.comboBoxProduct.TabIndex = 7;
-            this.comboBoxProduct.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProduct_SelectedIndexChanged);
+            this.comboBoxRepair.FormattingEnabled = true;
+            this.comboBoxRepair.Location = new System.Drawing.Point(147, 12);
+            this.comboBoxRepair.Name = "comboBoxProduct";
+            this.comboBoxRepair.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxRepair.TabIndex = 7;
+            this.comboBoxRepair.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRepair_SelectedIndexChanged);
             // 
             // labelAmount
             // 
@@ -125,7 +125,7 @@ namespace RenovationWorkView
             this.Controls.Add(this.labelRepair);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
-            this.Controls.Add(this.comboBoxProduct);
+            this.Controls.Add(this.comboBoxRepair);
             this.Name = "FormCreateOrder";
             this.Text = "Order";
             this.Load += new System.EventHandler(this.FormCreateOrder_Load);
@@ -139,7 +139,7 @@ namespace RenovationWorkView
         private System.Windows.Forms.Label labelRepair;
         private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.Button ButtonSave;
-        private System.Windows.Forms.ComboBox comboBoxProduct;
+        private System.Windows.Forms.ComboBox comboBoxRepair;
         private System.Windows.Forms.Label labelAmount;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.TextBox textBoxCount;

@@ -20,7 +20,7 @@ namespace RenovationWorkListImplement.Implements
         public List<RepairViewModel> GetFullList()
         {
             var result = new List<RepairViewModel>();
-            foreach (var component in source.Products)
+            foreach (var component in source.Repairs)
             {
                 result.Add(CreateModel(component));
             }
@@ -33,11 +33,11 @@ namespace RenovationWorkListImplement.Implements
                 return null;
             }
             var result = new List<RepairViewModel>();
-            foreach (var product in source.Products)
+            foreach (var repair in source.Repairs)
             {
-                if (product.ProductName.Contains(model.RepairName))
+                if (repair.RepairName.Contains(model.RepairName))
                 {
-                    result.Add(CreateModel(product));
+                    result.Add(CreateModel(repair));
                 }
             }
             return result;
@@ -48,95 +48,95 @@ namespace RenovationWorkListImplement.Implements
             {
                 return null;
             }
-            foreach (var product in source.Products)
+            foreach (var repair in source.Repairs)
             {
-                if (product.Id == model.Id || product.ProductName ==
+                if (repair.Id == model.Id || repair.RepairName ==
                 model.RepairName)
                 {
-                    return CreateModel(product);
+                    return CreateModel(repair);
                 }
             }
             return null;
         }
         public void Insert(RepairBindingModel model)
         {
-            var tempProduct = new Repair
+            var tempRepair = new Repair
             {
                 Id = 1,
-                ProductComponents = new
+                RepairComponents = new
             Dictionary<int, int>()
             };
-            foreach (var product in source.Products)
+            foreach (var repair in source.Repairs)
             {
-                if (product.Id >= tempProduct.Id)
+                if (repair.Id >= tempRepair.Id)
                 {
-                    tempProduct.Id = product.Id + 1;
+                    tempRepair.Id = repair.Id + 1;
                 }
             }
-            source.Products.Add(CreateModel(model, tempProduct));
+            source.Repairs.Add(CreateModel(model, tempRepair));
         }
 
         public void Update(RepairBindingModel model)
         {
-            Repair tempProduct = null;
-            foreach (var product in source.Products)
+            Repair tempRepair = null;
+            foreach (var repair in source.Repairs)
             {
-                if (product.Id == model.Id)
+                if (repair.Id == model.Id)
                 {
-                    tempProduct = product;
+                    tempRepair = repair;
                 }
             }
-            if (tempProduct == null)
+            if (tempRepair == null)
             {
                 throw new Exception("Element is not found");
             }
-            CreateModel(model, tempProduct);
+            CreateModel(model, tempRepair);
         }
         public void Delete(RepairBindingModel model)
         {
-            for (int i = 0; i < source.Products.Count; ++i)
+            for (int i = 0; i < source.Repairs.Count; ++i)
             {
-                if (source.Products[i].Id == model.Id)
+                if (source.Repairs[i].Id == model.Id)
                 {
-                    source.Products.RemoveAt(i);
+                    source.Repairs.RemoveAt(i);
                     return;
                 }
             }
             throw new Exception("Element is not found");
         }
-        private static Repair CreateModel(RepairBindingModel model, Repair product)
+        private static Repair CreateModel(RepairBindingModel model, Repair repair)
         {
-            product.ProductName = model.RepairName;
-            product.Price = model.Price;
+            repair.RepairName = model.RepairName;
+            repair.Price = model.Price;
             // удаляем убранные
-            foreach (var key in product.ProductComponents.Keys.ToList())
+            foreach (var key in repair.RepairComponents.Keys.ToList())
             {
-                if (!model.ProductComponents.ContainsKey(key))
+                if (!model.RepairComponents.ContainsKey(key))
                 {
-                    product.ProductComponents.Remove(key);
+                    repair.RepairComponents.Remove(key);
                 }
             }
             // обновляем существуюущие и добавляем новые
-            foreach (var component in model.ProductComponents)
+            foreach (var component in model.RepairComponents)
             {
-                if (product.ProductComponents.ContainsKey(component.Key))
+                if (repair.RepairComponents.ContainsKey(component.Key))
                 {
-                    product.ProductComponents[component.Key] =
-                    model.ProductComponents[component.Key].Item2;
+                    repair.RepairComponents[component.Key] =
+                    model.RepairComponents[component.Key].Item2;
                 }
                 else
                 {
-                    product.ProductComponents.Add(component.Key,
-                    model.ProductComponents[component.Key].Item2);
+                    repair.RepairComponents.Add(component.Key,
+                    model.RepairComponents[component.Key].Item2);
                 }
             }
-            return product;
+            return repair;
         }
-        private RepairViewModel CreateModel(Repair product)
+        private RepairViewModel CreateModel(Repair repair)
         {
             // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-        var productComponents = new Dictionary<int, (string, int)>();
-            foreach (var pc in product.ProductComponents)
+        var repairComponents = new Dictionary<int, (string, int)>();
+            foreach (var pc in repair.RepairComponents)
             {
                 string componentName = string.Empty;
                 foreach (var component in source.Components)
@@ -147,14 +147,14 @@ namespace RenovationWorkListImplement.Implements
                         break;
                     }
                 }
-                productComponents.Add(pc.Key, (componentName, pc.Value));
+                repairComponents.Add(pc.Key, (componentName, pc.Value));
             }
             return new RepairViewModel
             {
-                Id = product.Id,
-                RepairName = product.ProductName,
-                Price = product.Price,
-                RepairComponents = productComponents
+                Id = repair.Id,
+                RepairName = repair.RepairName,
+                Price = repair.Price,
+                RepairComponents = repairComponents
             };
         }
     }

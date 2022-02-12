@@ -38,7 +38,7 @@ namespace RenovationWorkListImplement.Implements
             var result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.ProductId == model.RepairId)
+                if (order.RepairId == model.RepairId)
                 {
                     result.Add(CreateModel(order));
                 }
@@ -107,7 +107,7 @@ namespace RenovationWorkListImplement.Implements
 
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
-            order.ProductId = model.RepairId;
+            order.RepairId = model.RepairId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -118,20 +118,20 @@ namespace RenovationWorkListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string productName = string.Empty;
-            foreach (var repair in source.Products)
+            string repairName = string.Empty;
+            foreach (var repair in source.Repairs)
             {
-                if (repair.Id == order.ProductId)
+                if (repair.Id == order.RepairId)
                 {
-                    productName = repair.ProductName;
+                    repairName = repair.RepairName;
                     break;
                 }
             }
             return new OrderViewModel
             {
                 Id = order.Id,
-                RepairId = order.ProductId,
-                ProductName = productName,
+                RepairId = order.RepairId,
+                RepairName = repairName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

@@ -163,7 +163,7 @@ namespace RenovationWorkView
                     Id = id,
                     RepairName = textBoxName.Text,
                     Price = Convert.ToDecimal(textBoxPrice.Text),
-                    ProductComponents = repairComponents
+                    RepairComponents = repairComponents
                 });
                 MessageBox.Show("Save successfully", "Message",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -12,13 +12,13 @@ namespace RenovationWorkListImplement
         private static DataListSingleton instance;
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Repair> Products { get; set; }
+        public List<Repair> Repairs { get; set; }
 
         private DataListSingleton()
         {
             Components = new List<Component>();
             Orders = new List<Order>();
-            Products = new List<Repair>();
+            Repairs = new List<Repair>();
         }
 
         public static DataListSingleton GetInstance()
