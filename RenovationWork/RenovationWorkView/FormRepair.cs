@@ -182,10 +182,5 @@ namespace RenovationWorkView
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }
