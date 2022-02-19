@@ -15,4 +15,10 @@
     <ProjectReference Include="..\RenovationWorkListImplement\RenovationWorkListImplement.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="FormWarehouses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

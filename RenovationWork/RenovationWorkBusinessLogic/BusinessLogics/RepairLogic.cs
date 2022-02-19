@@ -40,7 +40,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("There is already a component with the same name");
+                throw new Exception("There is already a repair with the same name");
             }
             if (model.Id.HasValue)
             {

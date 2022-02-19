@@ -33,12 +33,14 @@ namespace RenovationWorkView
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.repairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warehousesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonSubmitForExecution = new System.Windows.Forms.Button();
             this.ButtonOrderIsReady = new System.Windows.Forms.Button();
             this.ButtonOrderIsIssued = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
+            this.replenishingWarehouseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +59,9 @@ namespace RenovationWorkView
             // 
             this.manualToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.componentsToolStripMenuItem1,
-            this.repairsToolStripMenuItem});
+            this.repairsToolStripMenuItem,
+            this.warehousesToolStripMenuItem,
+            this.replenishingWarehouseToolStripMenuItem});
             this.manualToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
             this.manualToolStripMenuItem.Size = new System.Drawing.Size(74, 25);
@@ -66,16 +70,23 @@ namespace RenovationWorkView
             // componentsToolStripMenuItem1
             // 
             this.componentsToolStripMenuItem1.Name = "componentsToolStripMenuItem1";
-            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(250, 26);
             this.componentsToolStripMenuItem1.Text = "Components";
             this.componentsToolStripMenuItem1.Click += new System.EventHandler(this.componentsToolStripMenuItem1_Click);
             // 
             // repairsToolStripMenuItem
             // 
             this.repairsToolStripMenuItem.Name = "repairsToolStripMenuItem";
-            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
             this.repairsToolStripMenuItem.Text = "Repairs";
             this.repairsToolStripMenuItem.Click += new System.EventHandler(this.repairsToolStripMenuItem_Click);
+            // 
+            // warehousesToolStripMenuItem
+            // 
+            this.warehousesToolStripMenuItem.Name = "warehousesToolStripMenuItem";
+            this.warehousesToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.warehousesToolStripMenuItem.Text = "Warehouses";
+            this.warehousesToolStripMenuItem.Click += new System.EventHandler(this.warehousesToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -141,6 +152,13 @@ namespace RenovationWorkView
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
+            // replenishingWarehouseToolStripMenuItem
+            // 
+            this.replenishingWarehouseToolStripMenuItem.Name = "replenishingWarehouseToolStripMenuItem";
+            this.replenishingWarehouseToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.replenishingWarehouseToolStripMenuItem.Text = "Replenishing warehouse";
+            this.replenishingWarehouseToolStripMenuItem.Click += new System.EventHandler(this.replenishingWarehouseToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -177,5 +195,7 @@ namespace RenovationWorkView
         private System.Windows.Forms.Button ButtonOrderIsReady;
         private System.Windows.Forms.Button ButtonOrderIsIssued;
         private System.Windows.Forms.Button ButtonRef;
+        private System.Windows.Forms.ToolStripMenuItem warehousesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replenishingWarehouseToolStripMenuItem;
     }
 }
