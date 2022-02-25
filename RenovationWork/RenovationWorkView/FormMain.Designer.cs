@@ -40,7 +40,7 @@ namespace RenovationWorkView
             this.ButtonOrderIsReady = new System.Windows.Forms.Button();
             this.ButtonOrderIsIssued = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.replenishingWarehouseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replenishingWarehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,8 @@ namespace RenovationWorkView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manualToolStripMenuItem});
+            this.manualToolStripMenuItem,
+            this.replenishingWarehouseToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 29);
@@ -60,8 +61,7 @@ namespace RenovationWorkView
             this.manualToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.componentsToolStripMenuItem1,
             this.repairsToolStripMenuItem,
-            this.warehousesToolStripMenuItem,
-            this.replenishingWarehouseToolStripMenuItem});
+            this.warehousesToolStripMenuItem});
             this.manualToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
             this.manualToolStripMenuItem.Size = new System.Drawing.Size(74, 25);
@@ -152,12 +152,12 @@ namespace RenovationWorkView
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // replenishingWarehouseToolStripMenuItem
+            // replenishingWarehouseToolStripMenuItem1
             // 
-            this.replenishingWarehouseToolStripMenuItem.Name = "replenishingWarehouseToolStripMenuItem";
-            this.replenishingWarehouseToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.replenishingWarehouseToolStripMenuItem.Text = "Replenishing warehouse";
-            this.replenishingWarehouseToolStripMenuItem.Click += new System.EventHandler(this.replenishingWarehouseToolStripMenuItem_Click);
+            this.replenishingWarehouseToolStripMenuItem1.Name = "replenishingWarehouseToolStripMenuItem1";
+            this.replenishingWarehouseToolStripMenuItem1.Size = new System.Drawing.Size(147, 25);
+            this.replenishingWarehouseToolStripMenuItem1.Text = "Replenishing warehouse";
+            this.replenishingWarehouseToolStripMenuItem1.Click += new System.EventHandler(this.replenishingWarehouseToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -196,6 +196,6 @@ namespace RenovationWorkView
         private System.Windows.Forms.Button ButtonOrderIsIssued;
         private System.Windows.Forms.Button ButtonRef;
         private System.Windows.Forms.ToolStripMenuItem warehousesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem replenishingWarehouseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replenishingWarehouseToolStripMenuItem1;
     }
 }
