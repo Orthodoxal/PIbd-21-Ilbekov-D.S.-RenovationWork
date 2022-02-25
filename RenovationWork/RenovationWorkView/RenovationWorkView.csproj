@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RenovationWorkBusinessLogic\RenovationWorkBusinessLogic.csproj" />
+    <ProjectReference Include="..\RenovationWorkFileImplement\RenovationWorkFileImplement.csproj" />
     <ProjectReference Include="..\RenovationWorkListImplement\RenovationWorkListImplement.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,8 @@
 using RenovationWorkBusinessLogic.BusinessLogics;
 using RenovationWorkContracts.BusinessLogicsContracts;
 using RenovationWorkContracts.StoragesContracts;
-using RenovationWorkListImplement.Implements;
+using RenovationWorkFileImplement;
+using RenovationWorkFileImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace RenovationWorkView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.GetInstance().Save();
         }
 
         private static IUnityContainer BuildUnityContainer()
@@ -60,6 +62,5 @@ namespace RenovationWorkView
             HierarchicalLifetimeManager());
             return currentContainer;
         }
-
     }
 }
