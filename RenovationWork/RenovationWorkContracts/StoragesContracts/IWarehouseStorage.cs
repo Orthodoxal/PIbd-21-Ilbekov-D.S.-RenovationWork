@@ -16,5 +16,6 @@ namespace RenovationWorkContracts.StoragesContracts
         void Insert(WarehouseBindingModel model);
         void Update(WarehouseBindingModel model);
         void Delete(WarehouseBindingModel model);
+        bool SeizureComponents(ComponentBindingModel model);
     }
 }
