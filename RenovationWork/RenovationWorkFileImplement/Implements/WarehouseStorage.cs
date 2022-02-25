@@ -118,9 +118,9 @@ namespace RenovationWorkFileImplement.Implements
             };
         }
 
-        bool CheckAmount(OrderBindingModel model)
+        public bool SeizureComponents(OrderBindingModel model)
         {
-            Repair repair = (Repair) source.Repairs.Where(rec => rec.Id == model.Id);
+            Repair repair = source.Repairs.FirstOrDefault(rec => rec.Id == model.RepairId);
             var listRepairComponent = repair.RepairComponents;
             var listBalance = new Dictionary<int, int>();
 
@@ -135,8 +135,32 @@ namespace RenovationWorkFileImplement.Implements
                     }
                 }
                 if (comp.Value * model.Count > amountComp)
-                {
+                {                    
                     return false;
+                }
+                else
+                {
+                    listBalance.Add(comp.Key, comp.Value * model.Count);
+                }
+            }
+            foreach (var comp in listRepairComponent)
+            {
+                int amountCompOrder = comp.Value * model.Count;
+                foreach (var warehouse in source.Warehouses)
+                {
+                    if (warehouse.WarehouseComponents.ContainsKey(comp.Key))
+                    {
+                        if (warehouse.WarehouseComponents[comp.Key] >= amountCompOrder)
+                        {
+                            warehouse.WarehouseComponents[comp.Key] -= amountCompOrder;
+                            break;
+                        }
+                        else
+                        {
+                            amountCompOrder -= warehouse.WarehouseComponents[comp.Key];
+                            warehouse.WarehouseComponents[comp.Key] = 0;
+                        }
+                    }
                 }
             }
             return true;

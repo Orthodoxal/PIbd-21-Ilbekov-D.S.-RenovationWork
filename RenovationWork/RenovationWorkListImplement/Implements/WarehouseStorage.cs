@@ -158,5 +158,10 @@ namespace RenovationWorkListImplement.Implements
                 WarehouseComponents = warehouseComponents
             };
         }
+
+        public bool SeizureComponents(OrderBindingModel model)
+        {
+            return true;
+        }
     }
 }

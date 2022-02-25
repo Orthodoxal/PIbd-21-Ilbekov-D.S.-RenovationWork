@@ -14,10 +14,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly IWarehouseStorage _warehouseStorage;
 
-        public OrderLogic(IOrderStorage orderStorage)
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage)
         {
             _orderStorage = orderStorage;
+            _warehouseStorage = warehouseStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -56,7 +58,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             {
                 throw new Exception("Order has not status Accepted");
             }
-            _orderStorage.Update(new OrderBindingModel
+            var orderBM = new OrderBindingModel
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
@@ -65,7 +67,15 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Executing
-            });
+            };
+            if (_warehouseStorage.SeizureComponents(orderBM))
+            {
+                _orderStorage.Update(orderBM);
+            }   
+            else
+            {
+                throw new Exception("Not enough components for order");
+            }
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
