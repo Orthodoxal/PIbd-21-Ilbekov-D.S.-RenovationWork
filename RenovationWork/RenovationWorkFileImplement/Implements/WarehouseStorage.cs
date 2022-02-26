@@ -120,46 +120,41 @@ namespace RenovationWorkFileImplement.Implements
 
         public bool SeizureComponents(OrderBindingModel model)
         {
-            Repair repair = source.Repairs.FirstOrDefault(rec => rec.Id == model.RepairId);
-            var listRepairComponent = repair.RepairComponents;
-            var listBalance = new Dictionary<int, int>();
-
-            foreach(var comp in listRepairComponent)
-            {
-                int amountComp = 0;
-                foreach(var warehouse in source.Warehouses)
-                {
-                    if (warehouse.WarehouseComponents.ContainsKey(comp.Key))
-                    {
-                        amountComp += warehouse.WarehouseComponents[comp.Key];
-                    }
-                }
-                if (comp.Value * model.Count > amountComp)
-                {                    
-                    return false;
-                }
-                else
-                {
-                    listBalance.Add(comp.Key, comp.Value * model.Count);
-                }
-            }
+            var listRepairComponent = source.Repairs.FirstOrDefault(rec => rec.Id == model.RepairId).RepairComponents;
+            //проверка наличия компонентов
             foreach (var comp in listRepairComponent)
             {
-                int amountCompOrder = comp.Value * model.Count;
-                foreach (var warehouse in source.Warehouses)
+                //количество компонента необходимое для заказа
+                int amountComp = comp.Value * model.Count;
+                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
                 {
-                    if (warehouse.WarehouseComponents.ContainsKey(comp.Key))
+                    amountComp -= warehouse.WarehouseComponents[comp.Key];
+                    if (amountComp <= 0)
                     {
-                        if (warehouse.WarehouseComponents[comp.Key] >= amountCompOrder)
-                        {
-                            warehouse.WarehouseComponents[comp.Key] -= amountCompOrder;
-                            break;
-                        }
-                        else
-                        {
-                            amountCompOrder -= warehouse.WarehouseComponents[comp.Key];
-                            warehouse.WarehouseComponents[comp.Key] = 0;
-                        }
+                        break;
+                    }
+                }
+                if (amountComp > 0)
+                {
+                    return false;
+                }
+            }
+            //операция списания компонентов
+            foreach (var comp in listRepairComponent)
+            {
+                //количество компонента необходимое для заказа
+                int amountComp = comp.Value * model.Count;
+                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
+                {
+                    if (warehouse.WarehouseComponents[comp.Key] >= amountComp)
+                    {
+                        warehouse.WarehouseComponents[comp.Key] -= amountComp;
+                        break;
+                    }
+                    else
+                    {
+                        amountComp -= warehouse.WarehouseComponents[comp.Key];
+                        warehouse.WarehouseComponents[comp.Key] = 0;
                     }
                 }
             }
