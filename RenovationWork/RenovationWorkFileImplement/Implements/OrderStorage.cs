@@ -103,7 +103,7 @@ namespace RenovationWorkFileImplement.Implements
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
-                RepairName = repairName,
+                RepairName = source.Repairs.FirstOrDefault(rec => rec.Id == order.RepairId)?.RepairName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
