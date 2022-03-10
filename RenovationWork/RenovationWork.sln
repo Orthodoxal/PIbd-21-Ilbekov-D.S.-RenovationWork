@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkBusinessLogic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkListImplement", "RenovationWorkListImplement\RenovationWorkListImplement.csproj", "{4E370E5B-0757-466F-B7D1-79E5C51638E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkFileImplement", "RenovationWorkFileImplement\RenovationWorkFileImplement.csproj", "{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkFileImplement", "RenovationWorkFileImplement\RenovationWorkFileImplement.csproj", "{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkDatabaseImplement", "RenovationWorkDatabaseImplement\RenovationWorkDatabaseImplement.csproj", "{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -90,20 +90,11 @@ namespace RenovationWorkFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string repairName = string.Empty;
-            foreach (var repair in source.Repairs)
-            {
-                if (repair.Id == order.RepairId)
-                {
-                    repairName = repair.RepairName;
-                    break;
-                }
-            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
-                RepairName = repairName,
+                RepairName = source.Repairs.FirstOrDefault(rec => rec.Id == order.RepairId)?.RepairName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
