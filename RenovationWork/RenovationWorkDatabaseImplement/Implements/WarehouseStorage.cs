@@ -2,7 +2,6 @@
 using RenovationWorkContracts.BindingModels;
 using RenovationWorkContracts.StoragesContracts;
 using RenovationWorkContracts.ViewModels;
-using RenovationWorkDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace RenovationWorkDatabaseImplement.Implements
 {
-    public class RepairStorage : IRepairStorage
+    public class WarehouseStorage : IWarehouseStorage
     {
-        public List<RepairViewModel> GetFullList()
+        public List<WarehouseViewModel> GetFullList()
         {
             using var context = new RenovationWorkDatabase();
-            return context.Repairs
-            .Include(rec => rec.RepairComponents)
+            return context.Warehouses
+            .Include(rec => rec.WarehouseComponents)
             .ThenInclude(rec => rec.Component)
             .ToList()
             .Select(CreateModel)
             .ToList();
         }
-        public List<RepairViewModel> GetFilteredList(RepairBindingModel model)
+        public List<WarehouseViewModel> GetFilteredList(WarehouseBindingModel model)
         {
             if (model == null)
             {
@@ -38,7 +37,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             .Select(CreateModel)
             .ToList();
         }
-        public RepairViewModel GetElement(RepairBindingModel model)
+        public WarehouseViewModel GetElement(WarehouseBindingModel model)
         {
             if (model == null)
             {
@@ -52,7 +51,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             rec.Id == model.Id);
             return repair != null ? CreateModel(repair) : null;
         }
-        public void Insert(RepairBindingModel model)
+        public void Insert(WarehouseBindingModel model)
         {
             using var context = new RenovationWorkDatabase();
             using var transaction = context.Database.BeginTransaction();
@@ -69,7 +68,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             }
         }
 
-        public void Update(RepairBindingModel model)
+        public void Update(WarehouseBindingModel model)
         {
             using var context = new RenovationWorkDatabase();
             using var transaction = context.Database.BeginTransaction();
@@ -91,7 +90,7 @@ namespace RenovationWorkDatabaseImplement.Implements
                 throw;
             }
         }
-        public void Delete(RepairBindingModel model)
+        public void Delete(WarehouseBindingModel model)
         {
             using var context = new RenovationWorkDatabase();
             Repair element = context.Repairs.FirstOrDefault(rec => rec.Id ==
@@ -106,7 +105,7 @@ namespace RenovationWorkDatabaseImplement.Implements
                 throw new Exception("Element is not found");
             }
         }
-        private static Repair CreateModel(RepairBindingModel model, Repair repair, RenovationWorkDatabase context)
+        private static Warehouse CreateModel(WarehouseBindingModel model, Warehouse warehouse)
         {
             repair.RepairName = model.RepairName;
             repair.Price = model.Price;
@@ -146,15 +145,61 @@ namespace RenovationWorkDatabaseImplement.Implements
             }
             return repair;
         }
-        private RepairViewModel CreateModel(Repair repair)
-        {            
-            return new RepairViewModel
+        private WarehouseViewModel CreateModel(Warehouse warehouse)
+        {
+            return new WarehouseViewModel
             {
-                Id = repair.Id,
-                RepairName = repair.RepairName,
-                Price = repair.Price,
-                RepairComponents = repair.RepairComponents.ToDictionary(recPC => recPC.ComponentId, recPC => (recPC.Component?.ComponentName, recPC.Count))
+                Id = warehouse.Id,
+                WarehouseName = warehouse.WarehouseName,
+                ResponsibleFullName = warehouse.ResponsibleFullName,
+                DateCreate = warehouse.DateCreate,
+                WarehouseComponents = warehouse.WarehouseComponents.
+                ToDictionary(recRC => recRC.Key, recRC => (source.Components.
+                    FirstOrDefault(recC => recC.Id == recRC.Key)?.ComponentName, recRC.Value))
             };
+        }
+
+        public bool SeizureComponents(OrderBindingModel model)
+        {
+            var listRepairComponent = source.Repairs.FirstOrDefault(rec => rec.Id == model.RepairId).RepairComponents;
+            //проверка наличия компонентов
+            foreach (var comp in listRepairComponent)
+            {
+                //количество компонента необходимое для заказа
+                int amountComp = comp.Value * model.Count;
+                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
+                {
+                    amountComp -= warehouse.WarehouseComponents[comp.Key];
+                    if (amountComp <= 0)
+                    {
+                        break;
+                    }
+                }
+                if (amountComp > 0)
+                {
+                    return false;
+                }
+            }
+            //операция списания компонентов
+            foreach (var comp in listRepairComponent)
+            {
+                //количество компонента необходимое для заказа
+                int amountComp = comp.Value * model.Count;
+                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
+                {
+                    if (warehouse.WarehouseComponents[comp.Key] >= amountComp)
+                    {
+                        warehouse.WarehouseComponents[comp.Key] -= amountComp;
+                        break;
+                    }
+                    else
+                    {
+                        amountComp -= warehouse.WarehouseComponents[comp.Key];
+                        warehouse.WarehouseComponents[comp.Key] = 0;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RenovationWorkDatabaseImplement.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InititialCreateComplicated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,21 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Repairs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Warehouse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WarehouseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ResponsibleFullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Warehouse", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +100,33 @@ namespace RenovationWorkDatabaseImplement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WarehouseComponent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WarehouseId = table.Column<int>(type: "int", nullable: false),
+                    ComponentId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WarehouseComponent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WarehouseComponent_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WarehouseComponent_Warehouse_WarehouseId",
+                        column: x => x.WarehouseId,
+                        principalTable: "Warehouse",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_RepairId",
                 table: "Orders",
@@ -99,6 +141,16 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 name: "IX_RepairComponents_RepairId",
                 table: "RepairComponents",
                 column: "RepairId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WarehouseComponent_ComponentId",
+                table: "WarehouseComponent",
+                column: "ComponentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WarehouseComponent_WarehouseId",
+                table: "WarehouseComponent",
+                column: "WarehouseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -110,10 +162,16 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 name: "RepairComponents");
 
             migrationBuilder.DropTable(
-                name: "Components");
+                name: "WarehouseComponent");
 
             migrationBuilder.DropTable(
                 name: "Repairs");
+
+            migrationBuilder.DropTable(
+                name: "Components");
+
+            migrationBuilder.DropTable(
+                name: "Warehouse");
         }
     }
 }

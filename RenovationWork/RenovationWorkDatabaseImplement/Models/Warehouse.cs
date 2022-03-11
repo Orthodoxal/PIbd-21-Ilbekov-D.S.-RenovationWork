@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 namespace RenovationWorkDatabaseImplement.Models
 {
     /// <summary>
-    /// Компонент, требуемый для изготовления изделия
+    /// Склад
     /// </summary>
-    public class Component
+    public class Warehouse
     {
-        
         public int Id { get; set; }
         [Required]
-        public string ComponentName { get; set; }
-        [ForeignKey("ComponentId")]
-        public virtual List<RepairComponent> RepairComponents { get; set; }
-        [ForeignKey("ComponentId")]
+        public string WarehouseName { get; set; }
+        [Required]
+        public string ResponsibleFullName { get; set; }
+        [Required]
+        public DateTime DateCreate { get; set; }
+        [ForeignKey("WarehouseId")]
         public virtual List<WarehouseComponent> WarehouseComponents { get; set; }
     }
 }
