@@ -131,7 +131,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Warehouse");
+                    b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.WarehouseComponent", b =>
@@ -156,7 +156,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("WarehouseComponent");
+                    b.ToTable("WarehouseComponents");
                 });
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Order", b =>

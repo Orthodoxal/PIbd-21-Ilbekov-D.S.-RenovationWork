@@ -1,7 +1,7 @@
 using RenovationWorkBusinessLogic.BusinessLogics;
 using RenovationWorkContracts.BusinessLogicsContracts;
 using RenovationWorkContracts.StoragesContracts;
-using RenovationWorkFileImplement;
+using RenovationWorkDatabaseImplement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
-using RenovationWorkFileImplement.Implements;
+using RenovationWorkDatabaseImplement.Implements;
 
 namespace RenovationWorkView
 {
@@ -38,7 +38,6 @@ namespace RenovationWorkView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
-            FileDataListSingleton.GetInstance().Save();
         }
 
         private static IUnityContainer BuildUnityContainer()

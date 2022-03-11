@@ -2,6 +2,7 @@
 using RenovationWorkContracts.BindingModels;
 using RenovationWorkContracts.StoragesContracts;
 using RenovationWorkContracts.ViewModels;
+using RenovationWorkDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,10 @@ namespace RenovationWorkDatabaseImplement.Implements
                 return null;
             }
             using var context = new RenovationWorkDatabase();
-            return context.Repairs
-            .Include(rec => rec.RepairComponents)
+            return context.Warehouses
+            .Include(rec => rec.WarehouseComponents)
             .ThenInclude(rec => rec.Component)
-            .Where(rec => rec.RepairName.Contains(model.RepairName))
+            .Where(rec => rec.WarehouseName.Contains(model.WarehouseName))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -44,12 +45,12 @@ namespace RenovationWorkDatabaseImplement.Implements
                 return null;
             }
             using var context = new RenovationWorkDatabase();
-            var repair = context.Repairs
-            .Include(rec => rec.RepairComponents)
+            var warehouse = context.Warehouses
+            .Include(rec => rec.WarehouseComponents)
             .ThenInclude(rec => rec.Component)
-            .FirstOrDefault(rec => rec.RepairName == model.RepairName ||
+            .FirstOrDefault(rec => rec.WarehouseName == model.WarehouseName ||
             rec.Id == model.Id);
-            return repair != null ? CreateModel(repair) : null;
+            return warehouse != null ? CreateModel(warehouse) : null;
         }
         public void Insert(WarehouseBindingModel model)
         {
@@ -57,7 +58,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                CreateModel(model, new Repair(), context);
+                CreateModel(model, new Warehouse(), context);
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -74,7 +75,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                var element = context.Repairs.FirstOrDefault(rec => rec.Id ==
+                var element = context.Warehouses.FirstOrDefault(rec => rec.Id ==
                 model.Id);
                 if (element == null)
                 {
@@ -93,11 +94,11 @@ namespace RenovationWorkDatabaseImplement.Implements
         public void Delete(WarehouseBindingModel model)
         {
             using var context = new RenovationWorkDatabase();
-            Repair element = context.Repairs.FirstOrDefault(rec => rec.Id ==
+            Warehouse element = context.Warehouses.FirstOrDefault(rec => rec.Id ==
             model.Id);
             if (element != null)
             {
-                context.Repairs.Remove(element);
+                context.Warehouses.Remove(element);
                 context.SaveChanges();
             }
             else
@@ -105,45 +106,46 @@ namespace RenovationWorkDatabaseImplement.Implements
                 throw new Exception("Element is not found");
             }
         }
-        private static Warehouse CreateModel(WarehouseBindingModel model, Warehouse warehouse)
+        private static Warehouse CreateModel(WarehouseBindingModel model, Warehouse warehouse, RenovationWorkDatabase context)
         {
-            repair.RepairName = model.RepairName;
-            repair.Price = model.Price;
+            warehouse.WarehouseName = model.WarehouseName;
+            warehouse.ResponsibleFullName = model.ResponsibleFullName;
+            warehouse.DateCreate = model.DateCreate;
 
             if (model.Id.HasValue)
             {
-                var productComponents = context.RepairComponents.Where(rec =>
-               rec.RepairId == model.Id.Value).ToList();
+                var warehouseComponents = context.WarehouseComponents.Where(rec =>
+               rec.WarehouseId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.RepairComponents.RemoveRange(productComponents.Where(rec =>
-               !model.RepairComponents.ContainsKey(rec.ComponentId)).ToList());
+                context.WarehouseComponents.RemoveRange(warehouseComponents.Where(rec =>
+               !model.WarehouseComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
-                foreach (var updateComponent in productComponents)
+                foreach (var updateComponent in warehouseComponents)
                 {
                     updateComponent.Count =
-                   model.RepairComponents[updateComponent.ComponentId].Item2;
-                    model.RepairComponents.Remove(updateComponent.ComponentId);
+                   model.WarehouseComponents[updateComponent.ComponentId].Item2;
+                    model.WarehouseComponents.Remove(updateComponent.ComponentId);
                 }
                 context.SaveChanges();
             }
             else
             {
-                context.Repairs.Add(repair);
+                context.Warehouses.Add(warehouse);
                 context.SaveChanges();
             }
             // добавили новые
-            foreach (var pc in model.RepairComponents)
+            foreach (var pc in model.WarehouseComponents)
             {
-                context.RepairComponents.Add(new RepairComponent
+                context.WarehouseComponents.Add(new WarehouseComponent
                 {
-                    RepairId = repair.Id,
+                    WarehouseId = warehouse.Id,
                     ComponentId = pc.Key,
                     Count = pc.Value.Item2
                 });
                 context.SaveChanges();
             }
-            return repair;
+            return warehouse;
         }
         private WarehouseViewModel CreateModel(Warehouse warehouse)
         {
@@ -154,52 +156,53 @@ namespace RenovationWorkDatabaseImplement.Implements
                 ResponsibleFullName = warehouse.ResponsibleFullName,
                 DateCreate = warehouse.DateCreate,
                 WarehouseComponents = warehouse.WarehouseComponents.
-                ToDictionary(recRC => recRC.Key, recRC => (source.Components.
-                    FirstOrDefault(recC => recC.Id == recRC.Key)?.ComponentName, recRC.Value))
+                    ToDictionary(recPC => recPC.ComponentId,
+                    recPC => (recPC.Component?.ComponentName, recPC.Count))
             };
         }
 
         public bool SeizureComponents(OrderBindingModel model)
         {
-            var listRepairComponent = source.Repairs.FirstOrDefault(rec => rec.Id == model.RepairId).RepairComponents;
-            //проверка наличия компонентов
-            foreach (var comp in listRepairComponent)
+            using var context = new RenovationWorkDatabase();                   
+            using (var transaction = context.Database.BeginTransaction())
             {
-                //количество компонента необходимое для заказа
-                int amountComp = comp.Value * model.Count;
-                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
+                try
                 {
-                    amountComp -= warehouse.WarehouseComponents[comp.Key];
-                    if (amountComp <= 0)
+                    var listRepairComponent = context.RepairComponents.Where(rec => rec.RepairId == model.RepairId);
+                    //операция списания компонентов
+                    foreach (var comp in listRepairComponent)
                     {
-                        break;
+                        //количество компонента необходимое для заказа
+                        int amountCompRepair = comp.Count * model.Count;
+                        foreach (var warehouseComponents in context.WarehouseComponents.Where(rec => rec.ComponentId == comp.ComponentId))
+                        {
+                            if (warehouseComponents.Count > amountCompRepair)
+                            {
+                                warehouseComponents.Count -= amountCompRepair;
+                                amountCompRepair = 0;
+                                break;
+                            }
+                            else
+                            {
+                                amountCompRepair -= warehouseComponents.Count;
+                                warehouseComponents.Count = 0;
+                            }
+                        }
+                        if (amountCompRepair != 0)
+                        {
+                            throw new Exception("Not enough components");
+                        }
                     }
+                    context.SaveChanges();
+                    transaction.Commit();
+                    return true;
                 }
-                if (amountComp > 0)
+                catch
                 {
-                    return false;
+                    transaction.Rollback();
+                    throw;
                 }
             }
-            //операция списания компонентов
-            foreach (var comp in listRepairComponent)
-            {
-                //количество компонента необходимое для заказа
-                int amountComp = comp.Value * model.Count;
-                foreach (var warehouse in source.Warehouses.Where(rec => rec.WarehouseComponents.ContainsKey(comp.Key)))
-                {
-                    if (warehouse.WarehouseComponents[comp.Key] >= amountComp)
-                    {
-                        warehouse.WarehouseComponents[comp.Key] -= amountComp;
-                        break;
-                    }
-                    else
-                    {
-                        amountComp -= warehouse.WarehouseComponents[comp.Key];
-                        warehouse.WarehouseComponents[comp.Key] = 0;
-                    }
-                }
-            }
-            return true;
         }
     }
 }

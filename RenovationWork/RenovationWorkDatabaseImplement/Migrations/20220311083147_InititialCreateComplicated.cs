@@ -35,7 +35,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Warehouse",
+                name: "Warehouses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -46,7 +46,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Warehouse", x => x.Id);
+                    table.PrimaryKey("PK_Warehouses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +101,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WarehouseComponent",
+                name: "WarehouseComponents",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -112,17 +112,17 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WarehouseComponent", x => x.Id);
+                    table.PrimaryKey("PK_WarehouseComponents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WarehouseComponent_Components_ComponentId",
+                        name: "FK_WarehouseComponents_Components_ComponentId",
                         column: x => x.ComponentId,
                         principalTable: "Components",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WarehouseComponent_Warehouse_WarehouseId",
+                        name: "FK_WarehouseComponents_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
-                        principalTable: "Warehouse",
+                        principalTable: "Warehouses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -143,13 +143,13 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 column: "RepairId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WarehouseComponent_ComponentId",
-                table: "WarehouseComponent",
+                name: "IX_WarehouseComponents_ComponentId",
+                table: "WarehouseComponents",
                 column: "ComponentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WarehouseComponent_WarehouseId",
-                table: "WarehouseComponent",
+                name: "IX_WarehouseComponents_WarehouseId",
+                table: "WarehouseComponents",
                 column: "WarehouseId");
         }
 
@@ -162,7 +162,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 name: "RepairComponents");
 
             migrationBuilder.DropTable(
-                name: "WarehouseComponent");
+                name: "WarehouseComponents");
 
             migrationBuilder.DropTable(
                 name: "Repairs");
@@ -171,7 +171,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 name: "Components");
 
             migrationBuilder.DropTable(
-                name: "Warehouse");
+                name: "Warehouses");
         }
     }
 }
