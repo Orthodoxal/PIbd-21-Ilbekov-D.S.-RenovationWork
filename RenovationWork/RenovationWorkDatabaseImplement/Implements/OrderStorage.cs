@@ -18,16 +18,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var context = new RenovationWorkDatabase();
             return context.Orders
             .Include(rec => rec.Repair)
-            .Select(rec => new OrderViewModel {
-                Id = rec.Id,
-                RepairId = rec.RepairId,
-                RepairName = rec.Repair.RepairName,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            })
+            .Select(CreateModel)
             .ToList();
         }
 
@@ -41,17 +32,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             return context.Orders
                 .Include(rec => rec.Repair)
                 .Where(rec => rec.RepairId == model.RepairId)
-                .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        RepairId = rec.RepairId,
-                        RepairName = rec.Repair.RepairName,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        Status = rec.Status,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement
-                    })
+                .Select(CreateModel)
                 .ToList();
         }
 
@@ -62,8 +43,10 @@ namespace RenovationWorkDatabaseImplement.Implements
                 return null;
             }
             using var context = new RenovationWorkDatabase();
-            var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            return order != null ? CreateModel(order, context) : null;
+            var order = context.Orders
+                .Include(rec => rec.Repair)
+                .FirstOrDefault(rec => rec.Id == model.Id);
+            return order != null ? CreateModel(order) : null;
         }
 
         public void Insert(OrderBindingModel model)
@@ -111,13 +94,14 @@ namespace RenovationWorkDatabaseImplement.Implements
             return order;
         }
 
-        private OrderViewModel CreateModel(Order order, RenovationWorkDatabase context)
+        private OrderViewModel CreateModel(Order order)
         {
+            var temp = order.Repair.RepairName;
             return new OrderViewModel
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
-                RepairName = context.Repairs.FirstOrDefault(rec => rec.Id == order.RepairId)?.RepairName,
+                RepairName = order.Repair.RepairName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
