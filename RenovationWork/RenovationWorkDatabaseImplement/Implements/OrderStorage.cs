@@ -96,7 +96,6 @@ namespace RenovationWorkDatabaseImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            var temp = order.Repair.RepairName;
             return new OrderViewModel
             {
                 Id = order.Id,
