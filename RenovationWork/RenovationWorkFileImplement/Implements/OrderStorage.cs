@@ -30,7 +30,8 @@ namespace RenovationWorkFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.RepairId == model.RepairId)
+            return source.Orders.Where(rec => rec.RepairId == model.RepairId
+            || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Select(CreateModel)
                 .ToList();
         }

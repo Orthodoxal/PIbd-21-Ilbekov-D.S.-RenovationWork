@@ -31,7 +31,8 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var context = new RenovationWorkDatabase();
             return context.Orders
                 .Include(rec => rec.Repair)
-                .Where(rec => rec.RepairId == model.RepairId)
+                .Where(rec => rec.RepairId == model.RepairId
+                || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Select(CreateModel)
                 .ToList();
         }

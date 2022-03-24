@@ -33,6 +33,10 @@ namespace RenovationWorkView
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.repairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComponentsRepairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonSubmitForExecution = new System.Windows.Forms.Button();
@@ -46,7 +50,8 @@ namespace RenovationWorkView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manualToolStripMenuItem});
+            this.manualToolStripMenuItem,
+            this.reportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 29);
@@ -76,6 +81,37 @@ namespace RenovationWorkView
             this.repairsToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.repairsToolStripMenuItem.Text = "Repairs";
             this.repairsToolStripMenuItem.Click += new System.EventHandler(this.repairsToolStripMenuItem_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ComponentsToolStripMenuItem,
+            this.ComponentsRepairsToolStripMenuItem,
+            this.OrdersToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // ComponentsToolStripMenuItem
+            // 
+            this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
+            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ComponentsToolStripMenuItem.Text = "List components";
+            this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
+            // 
+            // ComponentsRepairsToolStripMenuItem
+            // 
+            this.ComponentsRepairsToolStripMenuItem.Name = "ComponentsRepairsToolStripMenuItem";
+            this.ComponentsRepairsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ComponentsRepairsToolStripMenuItem.Text = "Components by repairs";
+            this.ComponentsRepairsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsRepairsToolStripMenuItem_Click);
+            // 
+            // OrdersToolStripMenuItem
+            // 
+            this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.OrdersToolStripMenuItem.Text = "List orders";
+            this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -177,5 +213,9 @@ namespace RenovationWorkView
         private System.Windows.Forms.Button ButtonOrderIsReady;
         private System.Windows.Forms.Button ButtonOrderIsIssued;
         private System.Windows.Forms.Button ButtonRef;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ComponentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ComponentsRepairsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
     }
 }
