@@ -25,30 +25,30 @@ namespace RenovationWorkBusinessLogic.OfficePackage
                 CellToName = "C1"
             });
             uint rowIndex = 2;
-            foreach (var pc in info.RepairComponents)
+            foreach (var repair in info.Repairs)
             {
                 InsertCellInWorksheet(new ExcelCellParameters
                 {
                     ColumnName = "A",
                     RowIndex = rowIndex,
-                    Text = pc.ComponentName,
+                    Text = repair.RepairName,
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var repair in pc.Repairs)
+                foreach (var component in repair.Components)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "B",
                         RowIndex = rowIndex,
-                        Text = repair.Item1,
+                        Text = component.Item1,
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = repair.Item2.ToString(),
+                        Text = component.Item2.ToString(),
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     rowIndex++;
@@ -57,7 +57,7 @@ namespace RenovationWorkBusinessLogic.OfficePackage
                 {
                     ColumnName = "C",
                     RowIndex = rowIndex,
-                    Text = pc.TotalCount.ToString(),
+                    Text = repair.TotalCount.ToString(),
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;

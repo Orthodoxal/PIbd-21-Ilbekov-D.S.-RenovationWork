@@ -41,23 +41,19 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             var components = _componentStorage.GetFullList();
             var repairs = _repairStorage.GetFullList();
             var list = new List<ReportRepairComponentViewModel>();
-            foreach (var component in components)
+            foreach (var repair in repairs)
             {
                 var record = new ReportRepairComponentViewModel
                 {
-                    ComponentName = component.ComponentName,
-                    Repairs = new List<Tuple<string, int>>(),
+                    RepairName = repair.RepairName,
+                    Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var repair in repairs)
+                foreach (var component in repair.RepairComponents)
                 {
-                    if (repair.RepairComponents.ContainsKey(component.Id))
-                    {
-                        record.Repairs.Add(new Tuple<string, int>(repair.RepairName,
-                       repair.RepairComponents[component.Id].Item2));
-                        record.TotalCount +=
-                       repair.RepairComponents[component.Id].Item2;
-                    }
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1,
+                       component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
                 }
                 list.Add(record);
             }
@@ -78,7 +74,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             .Select(x => new ReportOrdersViewModel
             {
                 DateCreate = x.DateCreate,
-                ProductName = x.RepairName,
+                RepairName = x.RepairName,
                 Count = x.Count,
                 Sum = x.Sum,
                 Status = x.Status.ToString()
@@ -108,7 +104,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "List of components",
-                RepairComponents = GetRepairComponent()
+                Repairs = GetRepairComponent()
             });
         }
         /// <summary>

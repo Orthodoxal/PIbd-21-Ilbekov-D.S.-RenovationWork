@@ -31,9 +31,9 @@ namespace RenovationWorkView
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.ComponentName,
+                        dataGridView.Rows.Add(new object[] { elem.RepairName,
                             "", ""});
-                        foreach (var listElem in elem.Repairs)
+                        foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "",
                                 listElem.Item1, listElem.Item2 });

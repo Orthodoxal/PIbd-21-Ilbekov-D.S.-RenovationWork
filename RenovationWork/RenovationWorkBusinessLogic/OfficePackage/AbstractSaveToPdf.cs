@@ -26,8 +26,8 @@ namespace RenovationWorkBusinessLogic.OfficePackage
             CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
-                    "Сумма", "Статус" },
+                Texts = new List<string> { "Order Date", "Repair", "Amount",
+                    "Sum", "Status" },
                 Style = "NormalTitle",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
@@ -36,7 +36,7 @@ namespace RenovationWorkBusinessLogic.OfficePackage
                 CreateRow(new PdfRowParameters
                 {
                     Texts = new List<string> { order.DateCreate.ToShortDateString(), 
-                        order.ProductName, order.Count.ToString(),
+                        order.RepairName, order.Count.ToString(),
                         order.Sum.ToString(), order.Status.ToString()
                     },
                     Style = "Normal",
