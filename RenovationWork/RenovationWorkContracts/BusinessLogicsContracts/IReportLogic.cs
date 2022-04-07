@@ -28,6 +28,12 @@ namespace RenovationWorkContracts.BusinessLogicsContracts
         /// <returns></returns>
         List<ReportWarehouseComponentViewModel> GetWarehouseComponent();
         /// <summary>
+        /// Получение списка заказов по дате
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        List<ReportOrdersByDateViewModel> GetOrdersByDate();
+        /// <summary>
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
@@ -52,5 +58,9 @@ namespace RenovationWorkContracts.BusinessLogicsContracts
         /// </summary>
         /// <param name="model"></param>
         void SaveOrdersToPdfFile(ReportBindingModel model);
+        /// <summary>
+        /// Сохранение заказов по дате в файл-Pdf
+        /// </summary>
+        void SaveOrdersByDateToPdfFile(ReportBindingModel model);
     }
 }

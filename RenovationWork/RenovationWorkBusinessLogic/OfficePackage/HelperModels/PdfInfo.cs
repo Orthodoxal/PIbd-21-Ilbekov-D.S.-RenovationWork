@@ -14,5 +14,6 @@ namespace RenovationWorkBusinessLogic.OfficePackage.HelperModels
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<ReportOrdersByDateViewModel> OrdersByDate { get; set; }
     }
 }

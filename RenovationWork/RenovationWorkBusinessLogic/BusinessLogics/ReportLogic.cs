@@ -106,6 +106,23 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             return list;
         }
         /// <summary>
+        /// Получение списка заказов по дате
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<ReportOrdersByDateViewModel> GetOrdersByDate()
+        {
+            return _orderStorage.GetFullList()
+            .GroupBy(rec => rec.DateCreate.ToShortDateString())
+            .Select(x => new ReportOrdersByDateViewModel
+            {
+                DateCreate = Convert.ToDateTime(x.Key),
+                Count = x.Count(),
+                Sum = x.Sum(rec => rec.Sum)
+            })
+           .ToList();
+        }
+        /// <summary>
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
@@ -170,6 +187,18 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+        /// <summary>
+        /// Сохранение заказов по дате в файл-Pdf
+        /// </summary>
+        public void SaveOrdersByDateToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDocOrdersByDate(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов по датам",
+                OrdersByDate = GetOrdersByDate()
             });
         }
     }

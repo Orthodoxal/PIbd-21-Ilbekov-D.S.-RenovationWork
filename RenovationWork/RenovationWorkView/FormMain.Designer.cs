@@ -39,6 +39,7 @@ namespace RenovationWorkView
             this.ComponentsRepairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listWarehousesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warehouseWorkloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replenishingWarehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
@@ -46,7 +47,7 @@ namespace RenovationWorkView
             this.ButtonOrderIsReady = new System.Windows.Forms.Button();
             this.ButtonOrderIsIssued = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.warehouseWorkloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOrdersByDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -102,7 +103,8 @@ namespace RenovationWorkView
             this.ComponentsRepairsToolStripMenuItem,
             this.OrdersToolStripMenuItem,
             this.listWarehousesToolStripMenuItem,
-            this.warehouseWorkloadToolStripMenuItem});
+            this.warehouseWorkloadToolStripMenuItem,
+            this.listOrdersByDateToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -134,6 +136,13 @@ namespace RenovationWorkView
             this.listWarehousesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.listWarehousesToolStripMenuItem.Text = "List warehouses";
             this.listWarehousesToolStripMenuItem.Click += new System.EventHandler(this.WarehousesToolStripMenuItem_Click);
+            // 
+            // warehouseWorkloadToolStripMenuItem
+            // 
+            this.warehouseWorkloadToolStripMenuItem.Name = "warehouseWorkloadToolStripMenuItem";
+            this.warehouseWorkloadToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.warehouseWorkloadToolStripMenuItem.Text = "Warehouse workload";
+            this.warehouseWorkloadToolStripMenuItem.Click += new System.EventHandler(this.warehouseWorkloadToolStripMenuItem_Click);
             // 
             // replenishingWarehouseToolStripMenuItem1
             // 
@@ -206,12 +215,12 @@ namespace RenovationWorkView
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // warehouseWorkloadToolStripMenuItem
+            // listOrdersByDateToolStripMenuItem
             // 
-            this.warehouseWorkloadToolStripMenuItem.Name = "warehouseWorkloadToolStripMenuItem";
-            this.warehouseWorkloadToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.warehouseWorkloadToolStripMenuItem.Text = "Warehouse workload";
-            this.warehouseWorkloadToolStripMenuItem.Click += new System.EventHandler(this.warehouseWorkloadToolStripMenuItem_Click);
+            this.listOrdersByDateToolStripMenuItem.Name = "listOrdersByDateToolStripMenuItem";
+            this.listOrdersByDateToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.listOrdersByDateToolStripMenuItem.Text = "List orders by date";
+            this.listOrdersByDateToolStripMenuItem.Click += new System.EventHandler(this.listOrdersByDateToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -257,5 +266,6 @@ namespace RenovationWorkView
         private System.Windows.Forms.ToolStripMenuItem replenishingWarehouseToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem listWarehousesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warehouseWorkloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listOrdersByDateToolStripMenuItem;
     }
 }
