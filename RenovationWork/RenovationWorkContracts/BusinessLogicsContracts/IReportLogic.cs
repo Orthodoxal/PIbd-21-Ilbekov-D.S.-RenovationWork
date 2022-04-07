@@ -27,6 +27,11 @@ namespace RenovationWorkContracts.BusinessLogicsContracts
         /// <param name="model"></param>
         void SaveComponentsToWordFile(ReportBindingModel model);
         /// <summary>
+        /// Сохранение складов в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
+        void SaveWarehousesToWordFile(ReportBindingModel model);
+        /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
         /// </summary>
         /// <param name="model"></param>

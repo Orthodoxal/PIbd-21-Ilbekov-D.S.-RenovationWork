@@ -16,15 +16,17 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
     {
         private readonly IRepairStorage _repairStorage;
         private readonly IOrderStorage _orderStorage;
+        private readonly IWarehouseStorage _warehouseStorage;
         private readonly AbstractSaveToExcel _saveToExcel;
         private readonly AbstractSaveToWord _saveToWord;
         private readonly AbstractSaveToPdf _saveToPdf;
-        public ReportLogic(IRepairStorage repairStorage, IOrderStorage orderStorage,
+        public ReportLogic(IRepairStorage repairStorage, IOrderStorage orderStorage, IWarehouseStorage warehouseStorage,
         AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord,
        AbstractSaveToPdf saveToPdf)
         {
             _repairStorage = repairStorage;
             _orderStorage = orderStorage;
+            _warehouseStorage = warehouseStorage;
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
             _saveToPdf = saveToPdf;
@@ -78,6 +80,32 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
            .ToList();
         }
         /// <summary>
+        /// Получение списка складов за определенный период
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<ReportWarehouseComponentViewModel> GetWarehouseComponent()
+        {
+            var warehouses = _warehouseStorage.GetFullList();
+            var list = new List<ReportWarehouseComponentViewModel>();
+            foreach (var warehouse in warehouses)
+            {
+                var record = new ReportWarehouseComponentViewModel
+                {
+                    WarehouseName = warehouse.WarehouseName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in warehouse.WarehouseComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+        /// <summary>
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
@@ -88,6 +116,19 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "List of components",
                 Repairs = _repairStorage.GetFullList()
+            });
+        }
+        /// <summary>
+        /// Сохранение складов в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveWarehousesToWordFile(ReportBindingModel model)
+        {
+            _saveToWord.CreateDocWarehouse(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "List of warehouses",
+                Warehouses = _warehouseStorage.GetFullList()
             });
         }
         /// <summary>

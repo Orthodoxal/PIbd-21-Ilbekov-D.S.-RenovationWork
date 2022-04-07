@@ -33,18 +33,19 @@ namespace RenovationWorkView
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.repairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warehousesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentsRepairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.warehousesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listWarehousesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replenishingWarehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonSubmitForExecution = new System.Windows.Forms.Button();
             this.ButtonOrderIsReady = new System.Windows.Forms.Button();
             this.ButtonOrderIsIssued = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.replenishingWarehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -53,8 +54,7 @@ namespace RenovationWorkView
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualToolStripMenuItem,
-            this.reportsToolStripMenuItem});
-            this.manualToolStripMenuItem,
+            this.reportsToolStripMenuItem,
             this.replenishingWarehouseToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -76,23 +76,31 @@ namespace RenovationWorkView
             // componentsToolStripMenuItem1
             // 
             this.componentsToolStripMenuItem1.Name = "componentsToolStripMenuItem1";
-            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(250, 26);
+            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
             this.componentsToolStripMenuItem1.Text = "Components";
             this.componentsToolStripMenuItem1.Click += new System.EventHandler(this.componentsToolStripMenuItem1_Click);
             // 
             // repairsToolStripMenuItem
             // 
             this.repairsToolStripMenuItem.Name = "repairsToolStripMenuItem";
-            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.repairsToolStripMenuItem.Text = "Repairs";
             this.repairsToolStripMenuItem.Click += new System.EventHandler(this.repairsToolStripMenuItem_Click);
+            // 
+            // warehousesToolStripMenuItem
+            // 
+            this.warehousesToolStripMenuItem.Name = "warehousesToolStripMenuItem";
+            this.warehousesToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.warehousesToolStripMenuItem.Text = "Warehouses";
+            this.warehousesToolStripMenuItem.Click += new System.EventHandler(this.warehousesToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ComponentsToolStripMenuItem,
             this.ComponentsRepairsToolStripMenuItem,
-            this.OrdersToolStripMenuItem});
+            this.OrdersToolStripMenuItem,
+            this.listWarehousesToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -118,12 +126,19 @@ namespace RenovationWorkView
             this.OrdersToolStripMenuItem.Text = "List orders";
             this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
             // 
-            // warehousesToolStripMenuItem
+            // listWarehousesToolStripMenuItem
             // 
-            this.warehousesToolStripMenuItem.Name = "warehousesToolStripMenuItem";
-            this.warehousesToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.warehousesToolStripMenuItem.Text = "Warehouses";
-            this.warehousesToolStripMenuItem.Click += new System.EventHandler(this.warehousesToolStripMenuItem_Click);
+            this.listWarehousesToolStripMenuItem.Name = "listWarehousesToolStripMenuItem";
+            this.listWarehousesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.listWarehousesToolStripMenuItem.Text = "List warehouses";
+            this.listWarehousesToolStripMenuItem.Click += new System.EventHandler(this.WarehousesToolStripMenuItem_Click);
+            // 
+            // replenishingWarehouseToolStripMenuItem1
+            // 
+            this.replenishingWarehouseToolStripMenuItem1.Name = "replenishingWarehouseToolStripMenuItem1";
+            this.replenishingWarehouseToolStripMenuItem1.Size = new System.Drawing.Size(147, 25);
+            this.replenishingWarehouseToolStripMenuItem1.Text = "Replenishing warehouse";
+            this.replenishingWarehouseToolStripMenuItem1.Click += new System.EventHandler(this.replenishingWarehouseToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -189,13 +204,6 @@ namespace RenovationWorkView
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // replenishingWarehouseToolStripMenuItem1
-            // 
-            this.replenishingWarehouseToolStripMenuItem1.Name = "replenishingWarehouseToolStripMenuItem1";
-            this.replenishingWarehouseToolStripMenuItem1.Size = new System.Drawing.Size(147, 25);
-            this.replenishingWarehouseToolStripMenuItem1.Text = "Replenishing warehouse";
-            this.replenishingWarehouseToolStripMenuItem1.Click += new System.EventHandler(this.replenishingWarehouseToolStripMenuItem_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -238,5 +246,6 @@ namespace RenovationWorkView
         private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warehousesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replenishingWarehouseToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listWarehousesToolStripMenuItem;
     }
 }
