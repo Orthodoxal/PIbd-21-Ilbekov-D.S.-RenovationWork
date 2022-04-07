@@ -184,5 +184,11 @@ namespace RenovationWorkView
                     MessageBoxIcon.Information);
             }
         }
+
+        private void warehouseWorkloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportWarehouseComponent>();
+            form.ShowDialog();
+        }
     }
 }

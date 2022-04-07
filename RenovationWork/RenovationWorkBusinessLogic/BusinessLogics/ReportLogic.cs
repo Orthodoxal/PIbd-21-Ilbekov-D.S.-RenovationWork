@@ -145,6 +145,19 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             });
         }
         /// <summary>
+        /// Сохранение загруженности складов в файл-Excel
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveWarehouseComponentToExcelFile(ReportBindingModel model)
+        {
+            _saveToExcel.CreateReportWarehouse(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список компонент",
+                WarehouseComponents = GetWarehouseComponent()
+            });
+        }
+        /// <summary>
         /// Сохранение заказов в файл-Pdf
         /// </summary>
         /// <param name="model"></param>
