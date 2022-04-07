@@ -86,7 +86,7 @@ namespace RenovationWorkView
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonSaveToExcel);
             this.Name = "FormReportRepairComponents";
-            this.Text = "FormReportRepairComponents";
+            this.Text = "Components by repairs report";
             this.Load += new System.EventHandler(this.FormReportRepairComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

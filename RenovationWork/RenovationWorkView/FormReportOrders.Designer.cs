@@ -112,7 +112,7 @@ namespace RenovationWorkView
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel);
             this.Name = "FormReportOrders";
-            this.Text = "FormReportOrders";
+            this.Text = "Order report";
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);

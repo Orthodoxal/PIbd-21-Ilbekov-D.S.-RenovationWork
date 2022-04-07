@@ -14,19 +14,16 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
 {
     public class ReportLogic : IReportLogic
     {
-        private readonly IComponentStorage _componentStorage;
         private readonly IRepairStorage _repairStorage;
         private readonly IOrderStorage _orderStorage;
         private readonly AbstractSaveToExcel _saveToExcel;
         private readonly AbstractSaveToWord _saveToWord;
         private readonly AbstractSaveToPdf _saveToPdf;
-        public ReportLogic(IRepairStorage repairStorage, IComponentStorage
-       componentStorage, IOrderStorage orderStorage,
+        public ReportLogic(IRepairStorage repairStorage, IOrderStorage orderStorage,
         AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord,
        AbstractSaveToPdf saveToPdf)
         {
             _repairStorage = repairStorage;
-            _componentStorage = componentStorage;
             _orderStorage = orderStorage;
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
@@ -38,7 +35,6 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportRepairComponentViewModel> GetRepairComponent()
         {
-            var components = _componentStorage.GetFullList();
             var repairs = _repairStorage.GetFullList();
             var list = new List<ReportRepairComponentViewModel>();
             foreach (var repair in repairs)
