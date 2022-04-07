@@ -153,7 +153,9 @@ namespace RenovationWorkDatabaseImplement.Implements
                 Id = repair.Id,
                 RepairName = repair.RepairName,
                 Price = repair.Price,
-                RepairComponents = repair.RepairComponents.ToDictionary(recPC => recPC.ComponentId, recPC => (recPC.Component?.ComponentName, recPC.Count))
+                RepairComponents = repair.RepairComponents.
+                    ToDictionary(recPC => recPC.ComponentId,
+                        recPC => (recPC.Component?.ComponentName, recPC.Count))
             };
         }
     }
