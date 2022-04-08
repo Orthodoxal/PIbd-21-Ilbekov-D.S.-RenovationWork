@@ -10,7 +10,7 @@ using RenovationWorkDatabaseImplement.Implements;
 namespace RenovationWorkDatabaseImplement.Migrations
 {
     [DbContext(typeof(RenovationWorkDatabase))]
-    [Migration("20220308170758_InitialCreate")]
+    [Migration("20220407174424_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,30 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Component", b =>
                 {
@@ -44,6 +68,9 @@ namespace RenovationWorkDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -63,6 +90,8 @@ namespace RenovationWorkDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("RepairId");
 
@@ -115,11 +144,19 @@ namespace RenovationWorkDatabaseImplement.Migrations
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Order", b =>
                 {
+                    b.HasOne("RenovationWorkDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Orders")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RenovationWorkDatabaseImplement.Models.Repair", "Repair")
                         .WithMany("Orders")
                         .HasForeignKey("RepairId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
 
                     b.Navigation("Repair");
                 });
@@ -141,6 +178,11 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.Navigation("Component");
 
                     b.Navigation("Repair");
+                });
+
+            modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Client", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Component", b =>

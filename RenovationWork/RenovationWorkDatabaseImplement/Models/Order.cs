@@ -16,6 +16,8 @@ namespace RenovationWorkDatabaseImplement.Models
         public int Id { get; set; }
         public int RepairId { get; set; }
         public virtual Repair Repair { get; set; }
+        public int ClientId { get; set; }
+        public virtual Client Client { get; set; }
         [Required]
         public int Count { get; set; }
         [Required]

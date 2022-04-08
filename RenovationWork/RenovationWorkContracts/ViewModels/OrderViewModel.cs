@@ -15,6 +15,9 @@ namespace RenovationWorkContracts.ViewModels
     {
         public int Id { get; set; }
         public int RepairId { get; set; }
+        public int ClientId { get; set; }
+        [DisplayName("Client fullname")]
+        public string ClientFullname { get; set; }
         [DisplayName("Repair")]
         public string RepairName { get; set; }
         [DisplayName("Amount")]

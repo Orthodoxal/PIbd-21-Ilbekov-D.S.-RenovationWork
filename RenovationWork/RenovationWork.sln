@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkView", "RenovationWorkView\RenovationWorkView.csproj", "{96536454-CEAC-4E2A-AF83-46A1FD9E6859}"
 EndProject
@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkListImplement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkFileImplement", "RenovationWorkFileImplement\RenovationWorkFileImplement.csproj", "{1CAE5937-E1F3-4D93-9D77-6AA9A5A4CAA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkDatabaseImplement", "RenovationWorkDatabaseImplement\RenovationWorkDatabaseImplement.csproj", "{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkDatabaseImplement", "RenovationWorkDatabaseImplement\RenovationWorkDatabaseImplement.csproj", "{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkRestApi", "RenovationWorkRestApi\RenovationWorkRestApi.csproj", "{50164C65-2E32-4B4B-8987-42A46A11C8DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkClientApp", "RenovationWorkClientApp\RenovationWorkClientApp.csproj", "{9F499984-4634-430F-B736-24834925C160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181567FA-1B23-40A1-A5B6-D7CB38BCBE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50164C65-2E32-4B4B-8987-42A46A11C8DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50164C65-2E32-4B4B-8987-42A46A11C8DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50164C65-2E32-4B4B-8987-42A46A11C8DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50164C65-2E32-4B4B-8987-42A46A11C8DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F499984-4634-430F-B736-24834925C160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F499984-4634-430F-B736-24834925C160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F499984-4634-430F-B736-24834925C160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F499984-4634-430F-B736-24834925C160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

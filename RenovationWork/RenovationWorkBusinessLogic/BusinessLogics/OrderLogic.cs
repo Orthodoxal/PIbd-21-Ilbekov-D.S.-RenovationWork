@@ -41,7 +41,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = OrderStatus.Accepted,
-                DateCreate = DateTime.Now
+                DateCreate = DateTime.Now,
+                ClientId = model.ClientId
             });
         }
 
@@ -64,7 +65,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Executing
+                Status = OrderStatus.Executing,
+                ClientId = order.ClientId
             });
         }
 
@@ -87,7 +89,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Ready
+                Status = OrderStatus.Ready,
+                ClientId = order.ClientId
             });
         }
 
@@ -110,7 +113,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Issued
+                Status = OrderStatus.Issued,
+                ClientId = order.ClientId
             });
         }
     }

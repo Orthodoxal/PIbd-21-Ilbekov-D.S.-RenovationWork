@@ -32,7 +32,8 @@ namespace RenovationWorkView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    for (int i = 2; i < 8; i++)
+                    dataGridView.Columns[2].Visible = false;
+                    for (int i = 3; i < 9; i++)
                         dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
@@ -155,6 +156,12 @@ namespace RenovationWorkView
         private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }

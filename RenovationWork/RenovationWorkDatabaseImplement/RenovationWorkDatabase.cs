@@ -17,5 +17,6 @@ namespace RenovationWorkDatabaseImplement.Implements
         public virtual DbSet<Repair> Repairs { set; get; }
         public virtual DbSet<RepairComponent> RepairComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { get; set; }
     }
 }

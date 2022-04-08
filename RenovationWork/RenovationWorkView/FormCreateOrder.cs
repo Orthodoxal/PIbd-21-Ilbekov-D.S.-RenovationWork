@@ -17,11 +17,13 @@ namespace RenovationWorkView
     {
         private readonly IRepairLogic _logicR;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(IRepairLogic logicR, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(IRepairLogic logicR, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicR = logicR;
             _logicO = logicO;
+            _logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -34,6 +36,14 @@ namespace RenovationWorkView
                 comboBoxRepair.ValueMember = "Id";
                 comboBoxRepair.DataSource = list;
                 comboBoxRepair.SelectedItem = null;
+            }
+            List<ClientViewModel> listClients = _logicC.Read(null);
+            if (listClients != null)
+            {
+                comboBoxClient.DisplayMember = "Fullname";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.DataSource = listClients;
+                comboBoxClient.SelectedItem = null;
             }
         }
 
@@ -85,13 +95,20 @@ namespace RenovationWorkView
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Choose client", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     RepairId = Convert.ToInt32(comboBoxRepair.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text)
+                    Sum = Convert.ToDecimal(textBoxSum.Text),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue)
                 });
                 MessageBox.Show("Save successfully", "Message",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
