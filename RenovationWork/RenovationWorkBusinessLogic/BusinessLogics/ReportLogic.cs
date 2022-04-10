@@ -170,7 +170,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             _saveToExcel.CreateReportWarehouse(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "List of components",
                 WarehouseComponents = GetWarehouseComponent()
             });
         }
@@ -197,7 +197,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             _saveToPdf.CreateDocOrdersByDate(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов по датам",
+                Title = "List of orders by date",
                 OrdersByDate = GetOrdersByDate()
             });
         }

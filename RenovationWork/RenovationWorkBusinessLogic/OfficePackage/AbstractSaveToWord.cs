@@ -46,7 +46,7 @@ namespace RenovationWorkBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            CreateTable(new List<string>() { "Название", "ФИО ответственного", "Дата создания" });
+            CreateTable(new List<string>() { "Name", "Responsible name", "Date Create" });
             foreach (var warehouse in info.Warehouses)
             {
                 addRowTable(new List<string>() {
