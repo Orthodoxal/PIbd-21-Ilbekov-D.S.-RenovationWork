@@ -35,20 +35,20 @@ namespace AbstractShowClientApp.Controllers
             return View(Program.Client);
         }
         [HttpPost]
-        public void Privacy(string login, string password, string fio)
+        public void Privacy(string login, string password, string fullname)
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)
-            && !string.IsNullOrEmpty(fio))
+                && !string.IsNullOrEmpty(fullname))
             {
                 APIClient.PostRequest("api/client/updatedata", new
                 ClientBindingModel
                 {
                     Id = Program.Client.Id,
-                    Fullname = fio,
+                    Fullname = fullname,
                     Login = login,
                     Password = password
                 });
-                Program.Client.Fullname = fio;
+                Program.Client.Fullname = fullname;
                 Program.Client.Login = login;
                 Program.Client.Password = password;
                 Response.Redirect("Index");
@@ -56,14 +56,12 @@ namespace AbstractShowClientApp.Controllers
             }
             throw new Exception("Enter login, password and fullname");
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore
-        = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel
             {
-                RequestId = Activity.Current?.Id ??
-            HttpContext.TraceIdentifier
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             });
         }
         [HttpGet]
@@ -93,15 +91,15 @@ namespace AbstractShowClientApp.Controllers
             return View();
         }
         [HttpPost]
-        public void Register(string login, string password, string fio)
+        public void Register(string login, string password, string fullname)
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)
-            && !string.IsNullOrEmpty(fio))
+            && !string.IsNullOrEmpty(fullname))
             {
                 APIClient.PostRequest("api/client/register", new
                 ClientBindingModel
                 {
-                    Fullname = fio,
+                    Fullname = fullname,
                     Login = login,
                     Password = password
                 });
