@@ -70,6 +70,10 @@ namespace RenovationWorkView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IImplementerLogic, ImplementerLogic>(new
+                HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWorkProcess, WorkModeling>(new
+                HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

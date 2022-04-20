@@ -17,16 +17,19 @@ namespace RenovationWorkFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadRepairs();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -42,6 +45,7 @@ namespace RenovationWorkFileImplement
             SaveOrders();
             SaveRepairs();
             SaveClients();
+            SaveImplementers();
         }
         private List<Component> LoadComponents()
         {
@@ -140,6 +144,26 @@ namespace RenovationWorkFileImplement
             }
             return list;
         }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                var xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Imlementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Fullname = elem.Attribute("Fullname").Value,
+                        PauseTime = Convert.ToInt32(elem.Attribute("PauseTime").Value),
+                        WorkingTime = Convert.ToInt32(elem.Attribute("WorkingTime").Value)
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -215,6 +239,20 @@ namespace RenovationWorkFileImplement
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
             }
+        }
+        private void SaveImplementers()
+        {
+            var xElement = new XElement("Implementers");
+            foreach (var implementer in Implementers)
+            {
+                xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XAttribute("Fullname", implementer.Fullname),
+                    new XAttribute("WorkingTime", implementer.WorkingTime),
+                    new XAttribute("PauseTime", implementer.PauseTime)));
+            }
+            var xDocument = new XDocument(xElement);
+            xDocument.Save(ImplementerFileName);
         }
     }
 }

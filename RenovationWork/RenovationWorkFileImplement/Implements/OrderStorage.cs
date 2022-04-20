@@ -32,7 +32,8 @@ namespace RenovationWorkFileImplement.Implements
             }
             return source.Orders.Where(rec => rec.RepairId == model.RepairId
             || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-            || (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value))
+            || (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)
+            || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
                 .Select(CreateModel)
                 .ToList();
         }
@@ -88,6 +89,7 @@ namespace RenovationWorkFileImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
 
@@ -104,7 +106,9 @@ namespace RenovationWorkFileImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ImplementerId = order.ImplementerId,
+                ImplementerFullname = source.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.Fullname
             };
         }
     }

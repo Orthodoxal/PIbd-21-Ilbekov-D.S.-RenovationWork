@@ -19,6 +19,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             return context.Orders
             .Include(rec => rec.Repair)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .Select(CreateModel)
             .ToList();
         }
@@ -33,9 +34,12 @@ namespace RenovationWorkDatabaseImplement.Implements
             return context.Orders
                 .Include(rec => rec.Repair)
                 .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                 .Where(rec => rec.RepairId == model.RepairId
                 || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
+                || (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status)
+                || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
                 .Select(CreateModel)
                 .ToList();
         }
@@ -50,6 +54,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             var order = context.Orders
                 .Include(rec => rec.Repair)
                 .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                 .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
@@ -97,6 +102,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
 
@@ -113,7 +119,9 @@ namespace RenovationWorkDatabaseImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ClientId = order.ClientId,
-                ClientFullname = order.Client.Fullname
+                ClientFullname = order.Client.Fullname,
+                ImplementerId = order.ImplementerId,
+                ImplementerFullname = order.ImplementerId.HasValue ? order.Implementer.Fullname : string.Empty
             };
         }
     }
