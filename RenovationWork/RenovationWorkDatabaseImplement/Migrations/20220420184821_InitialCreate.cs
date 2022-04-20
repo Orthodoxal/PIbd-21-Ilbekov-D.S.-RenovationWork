@@ -41,7 +41,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImplementerFullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WorkingTime = table.Column<int>(type: "int", nullable: false),
                     PauseTime = table.Column<int>(type: "int", nullable: false)
                 },

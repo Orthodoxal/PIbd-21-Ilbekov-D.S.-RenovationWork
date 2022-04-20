@@ -42,12 +42,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             }));
             foreach (var order in runOrders)
             {
-                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                Thread.Sleep(implementer.WorkingTime * 100 * rnd.Next(1, 5) * order.Count);
                 orderLogic.FinishOrder(new ChangeStatusBindingModel
                 {
                     OrderId = order.Id
                 });
-                Thread.Sleep(implementer.PauseTime);
+                Thread.Sleep(implementer.PauseTime * 100);
             }
             await Task.Run(() =>
             {
@@ -60,13 +60,13 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                             OrderId = order.Id,
                             ImplementerId = implementer.Id
                         });
-                        Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                        Thread.Sleep(implementer.WorkingTime * 100 * rnd.Next(1, 5) * order.Count);
                         orderLogic.FinishOrder(new ChangeStatusBindingModel
                         {
                             OrderId = order.Id,
                             ImplementerId = implementer.Id
                         });
-                        Thread.Sleep(implementer.PauseTime);
+                        Thread.Sleep(implementer.PauseTime * 100);
                     }
                 }
             });

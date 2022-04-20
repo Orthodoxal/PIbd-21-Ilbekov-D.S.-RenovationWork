@@ -10,7 +10,7 @@ using RenovationWorkDatabaseImplement.Implements;
 namespace RenovationWorkDatabaseImplement.Migrations
 {
     [DbContext(typeof(RenovationWorkDatabase))]
-    [Migration("20220420162353_InitialCreate")]
+    [Migration("20220420184821_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,7 @@ namespace RenovationWorkDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImplementerFullname")
+                    b.Property<string>("Fullname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -66,7 +66,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Executing,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId
             });
         }
 
@@ -90,7 +91,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Ready,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId
             });
         }
 
@@ -114,7 +116,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Issued,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId
             });
         }
     }
