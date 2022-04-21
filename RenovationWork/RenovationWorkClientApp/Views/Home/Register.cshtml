@@ -1,0 +1,27 @@
+﻿@using RenovationWorkContracts.ViewModels
+@model ClientViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="text-center">
+    <h2 class="display-4">Registration</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Login:</div>
+        <div class="col-8"><input type="text" name="login" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Password:</div>
+        <div class="col-8"><input type="password" name="password" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Fullname:</div>
+        <div class="col-8"><input type="text" name="fullname" /></div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Registration" class="btn btnprimary" /></div>
+    </div>
+</form>
+
