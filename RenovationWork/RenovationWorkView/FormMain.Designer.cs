@@ -72,7 +72,7 @@ namespace RenovationWorkView
             this.manualToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.componentsToolStripMenuItem1,
             this.repairsToolStripMenuItem,
-            this.warehousesToolStripMenuItem},
+            this.warehousesToolStripMenuItem,
             this.clientsToolStripMenuItem});            
             this.manualToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";

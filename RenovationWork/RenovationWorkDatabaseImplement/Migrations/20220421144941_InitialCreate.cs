@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RenovationWorkDatabaseImplement.Migrations
 {
-    public partial class InititialCreateComplicated : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -189,14 +189,10 @@ namespace RenovationWorkDatabaseImplement.Migrations
                 name: "RepairComponents");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220311083147_InititialCreateComplicated.cs
                 name: "WarehouseComponents");
-========
-                name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Components");
->>>>>>>> LABA5:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220407174424_InitialCreate.cs
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Repairs");

@@ -10,13 +10,8 @@ using RenovationWorkDatabaseImplement.Implements;
 namespace RenovationWorkDatabaseImplement.Migrations
 {
     [DbContext(typeof(RenovationWorkDatabase))]
-<<<<<<<< HEAD:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220311083147_InititialCreateComplicated.Designer.cs
-    [Migration("20220311083147_InititialCreateComplicated")]
-    partial class InititialCreateComplicated
-========
-    [Migration("20220407174424_InitialCreate")]
+    [Migration("20220421144941_InitialCreate")]
     partial class InitialCreate
->>>>>>>> LABA5:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220407174424_InitialCreate.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,7 +228,6 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.Navigation("Repair");
                 });
 
-<<<<<<<< HEAD:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220311083147_InititialCreateComplicated.Designer.cs
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.WarehouseComponent", b =>
                 {
                     b.HasOne("RenovationWorkDatabaseImplement.Models.Component", "Component")
@@ -251,11 +245,11 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.Navigation("Component");
 
                     b.Navigation("Warehouse");
-========
+                });
+
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Client", b =>
                 {
                     b.Navigation("Orders");
->>>>>>>> LABA5:RenovationWork/RenovationWorkDatabaseImplement/Migrations/20220407174424_InitialCreate.Designer.cs
                 });
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Component", b =>
