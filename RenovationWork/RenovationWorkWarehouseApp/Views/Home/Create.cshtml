@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+<div class="text-center">
+    <h2 class="display-4">Creating warehouse</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Warehouse:</div>
+        <div class="col-8">
+            <div class="col-4">Warehouse name:</div>
+            <div class="col-8"><input type="text" name="warehouseName" id="warehouseName" /></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Responsible Fullname:</div>
+        <div class="col-8"><input type="text" name="ResponsibleFullName" id="ResponsibleFullName" /></div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Create" class="btn btnprimary" /></div>
+    </div>
+</form>
