@@ -18,6 +18,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var context = new RenovationWorkDatabase();
             return context.Orders
             .Include(rec => rec.Repair)
+            .Include(rec => rec.Client)
             .Select(CreateModel)
             .ToList();
         }
@@ -31,8 +32,10 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var context = new RenovationWorkDatabase();
             return context.Orders
                 .Include(rec => rec.Repair)
+                .Include(rec => rec.Client)
                 .Where(rec => rec.RepairId == model.RepairId
-                || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
                 .Select(CreateModel)
                 .ToList();
         }
@@ -46,6 +49,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             using var context = new RenovationWorkDatabase();
             var order = context.Orders
                 .Include(rec => rec.Repair)
+                .Include(rec => rec.Client)
                 .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
@@ -92,6 +96,7 @@ namespace RenovationWorkDatabaseImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
 
@@ -106,7 +111,9 @@ namespace RenovationWorkDatabaseImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFullname = order.Client.Fullname
             };
         }
     }

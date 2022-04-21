@@ -53,6 +53,8 @@ namespace RenovationWorkView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWarehouseStorage, WarehouseStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
@@ -60,6 +62,8 @@ namespace RenovationWorkView
             currentContainer.RegisterType<IRepairLogic, RepairLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new
             HierarchicalLifetimeManager());

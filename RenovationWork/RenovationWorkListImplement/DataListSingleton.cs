@@ -14,6 +14,7 @@ namespace RenovationWorkListImplement
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
         public List<Warehouse> Warehouses{ get; set; }
+        public List<Client> Clients { get; set; }
 
         private DataListSingleton()
         {
@@ -21,6 +22,7 @@ namespace RenovationWorkListImplement
             Orders = new List<Order>();
             Repairs = new List<Repair>();
             Warehouses = new List<Warehouse>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()

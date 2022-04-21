@@ -10,6 +10,7 @@ namespace RenovationWorkContracts.ViewModels
     {
         public DateTime DateCreate { get; set; }
         public string RepairName { get; set; }
+        public string ClientFullname { get; set; }
         public int Count { get; set; }
         public decimal Sum { get; set; }
         public string Status { get; set; }

@@ -75,7 +75,8 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 RepairName = x.RepairName,
                 Count = x.Count,
                 Sum = x.Sum,
-                Status = x.Status.ToString()
+                Status = x.Status.ToString(),
+                ClientFullname = x.ClientFullname
             })
            .ToList();
         }

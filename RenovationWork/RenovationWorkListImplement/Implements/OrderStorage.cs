@@ -39,7 +39,8 @@ namespace RenovationWorkListImplement.Implements
             foreach (var order in source.Orders)
             {
                 if (order.RepairId == model.RepairId
-                    || (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo))
+                    || (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) 
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId.Value))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -114,6 +115,7 @@ namespace RenovationWorkListImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
 
@@ -128,6 +130,15 @@ namespace RenovationWorkListImplement.Implements
                     break;
                 }
             }
+            string clientFullname = string.Empty;
+            foreach (var client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFullname = client.Fullname;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -137,7 +148,9 @@ namespace RenovationWorkListImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFullname = clientFullname
             };
         }
     }

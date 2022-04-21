@@ -17,16 +17,19 @@ namespace RenovationWorkFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
         private readonly string WarehouseFileName = "Warehouse.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
         public List<Warehouse> Warehouses { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadRepairs();
             Warehouses = LoadWarehouses();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -42,6 +45,7 @@ namespace RenovationWorkFileImplement
             SaveOrders();
             SaveRepairs();
             SaveWarehouse();
+            SaveClients();
         }
         private List<Component> LoadComponents()
         {
@@ -150,6 +154,26 @@ namespace RenovationWorkFileImplement
             return list;
         }
 
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                var xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Fullname = elem.Element("Fullname").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -233,6 +257,23 @@ namespace RenovationWorkFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(WarehouseFileName);
+            }
+        }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                        new XAttribute("Id", client.Id),
+                        new XElement("Fullname", client.Fullname),
+                        new XElement("Login", client.Login),
+                        new XElement("Password", client.Password)));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }
