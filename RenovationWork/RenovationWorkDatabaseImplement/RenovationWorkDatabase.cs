@@ -20,5 +20,6 @@ namespace RenovationWorkDatabaseImplement.Implements
         public virtual DbSet<WarehouseComponent> WarehouseComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Implementer> Implementers { get; set; }
     }
 }
