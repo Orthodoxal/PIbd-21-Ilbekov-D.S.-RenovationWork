@@ -117,7 +117,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Issued,
                 ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId
+                ImplementerId = order.ImplementerId
             });
         }
     }
