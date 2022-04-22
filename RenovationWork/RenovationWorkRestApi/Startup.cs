@@ -11,10 +11,6 @@ using RenovationWorkBusinessLogic.BusinessLogics;
 using RenovationWorkContracts.BusinessLogicsContracts;
 using RenovationWorkContracts.StoragesContracts;
 using RenovationWorkDatabaseImplement.Implements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RenovationWorkRestApi
 {
@@ -41,7 +37,7 @@ namespace RenovationWorkRestApi
             services.AddTransient<IWarehouseLogic, WarehouseLogic>();
             services.AddTransient<IComponentLogic, ComponentLogic>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RenovationWorkRestApi", Version = "v1" });
