@@ -7,7 +7,7 @@ using RenovationWorkContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-namespace AbstractShowClientApp.Controllers
+namespace RenovationWorkClientApp.Controllers
 {
     public class HomeController : Controller
     {
