@@ -173,7 +173,7 @@ namespace RenovationWorkView
         }
 
         private void startWorkingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {            
             _workProcess.DoWork(_implementerLogic, _orderLogic);
         }
     }

@@ -14,6 +14,7 @@ namespace RenovationWorkContracts.Enums
         Accepted = 0,
         Executing = 1,
         Ready = 2,
-        Issued = 3
+        Issued = 3,
+        RequiredComponents = 4
     }
 }

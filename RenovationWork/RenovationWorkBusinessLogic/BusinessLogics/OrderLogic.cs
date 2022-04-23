@@ -55,9 +55,9 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             {
                 throw new Exception("Order is not found");
             }
-            if (order.Status != OrderStatus.Accepted)
+            if (order.Status != OrderStatus.Accepted && order.Status != OrderStatus.RequiredComponents)
             {
-                throw new Exception("Order has not status Accepted");
+                throw new Exception("Order has not status Accepted or Required components");
             }
             var orderBM = new OrderBindingModel
             {
@@ -66,18 +66,21 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Executing,
                 ClientId = order.ClientId,
                 ImplementerId = model.ImplementerId
             };
-            if (_warehouseStorage.SeizureComponents(orderBM))
+            try {
+                if (_warehouseStorage.SeizureComponents(orderBM))
+                {
+                    orderBM.Status = OrderStatus.Executing;
+                    orderBM.DateImplement = DateTime.Now;
+                    _orderStorage.Update(orderBM);
+                }
+            }
+            catch
             {
+                orderBM.Status = OrderStatus.RequiredComponents;
                 _orderStorage.Update(orderBM);
-            }   
-            else
-            {
-                throw new Exception("Not enough components for order");
             }
         }
 

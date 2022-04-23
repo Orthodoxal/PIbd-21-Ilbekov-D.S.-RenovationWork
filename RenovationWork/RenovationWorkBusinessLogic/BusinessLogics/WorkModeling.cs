@@ -49,6 +49,33 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 });
                 Thread.Sleep(implementer.PauseTime * 100);
             }
+
+            var requiredComponentsOrders = await Task.Run(() => orderLogic.Read(new OrderBindingModel
+            {
+                ImplementerId = implementer.Id,
+                Status = OrderStatus.RequiredComponents
+            }));
+            foreach (var order in requiredComponentsOrders)
+            {
+                orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
+                {
+                    OrderId = order.Id,
+                    ImplementerId = implementer.Id
+                });
+                OrderViewModel tempOrder = orderLogic.Read(new OrderBindingModel { Id = order.Id })?[0];
+                if (tempOrder.Status == OrderStatus.RequiredComponents)
+                {
+                    continue;
+                }
+                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                orderLogic.FinishOrder(new ChangeStatusBindingModel
+                {
+                    OrderId = order.Id,
+                    ImplementerId = implementer.Id
+                });
+                Thread.Sleep(implementer.PauseTime);
+            }
+
             await Task.Run(() =>
             {
                 while (!orders.IsEmpty)
@@ -60,6 +87,11 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                             OrderId = order.Id,
                             ImplementerId = implementer.Id
                         });
+                        OrderViewModel isRequiredOrder = orderLogic.Read(new OrderBindingModel { Id = order.Id })?[0];
+                        if (isRequiredOrder.Status == OrderStatus.RequiredComponents)
+                        {
+                            continue;
+                        }
                         Thread.Sleep(implementer.WorkingTime * 100 * rnd.Next(1, 5) * order.Count);
                         orderLogic.FinishOrder(new ChangeStatusBindingModel
                         {
