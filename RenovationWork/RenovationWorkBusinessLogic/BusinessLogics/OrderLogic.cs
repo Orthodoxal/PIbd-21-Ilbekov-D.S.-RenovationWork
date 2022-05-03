@@ -1,4 +1,5 @@
-﻿using RenovationWorkContracts.BindingModels;
+﻿using RenovationWorkBusinessLogic.MailWorker;
+using RenovationWorkContracts.BindingModels;
 using RenovationWorkContracts.BusinessLogicsContracts;
 using RenovationWorkContracts.Enums;
 using RenovationWorkContracts.StoragesContracts;
@@ -14,10 +15,13 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly AbstractMailWorker _mailWorker;
+        private readonly IClientStorage _clientStorage;
+        public OrderLogic(IOrderStorage orderStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         {
             _orderStorage = orderStorage;
+            _mailWorker = mailWorker;
+            _clientStorage = clientStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -44,6 +48,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 ClientId = model.ClientId
             });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = model.ClientId })?.Login,
+                Subject = "New order has been created",
+                Text = $"Date order: {DateTime.Now}, sum order: {model.Sum}"
+            });
         }
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
@@ -68,6 +78,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Status = OrderStatus.Executing,
                 ClientId = order.ClientId,
                 ImplementerId = model.ImplementerId
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Login,
+                Subject = $"Changing order status in order №{order.Id}",
+                Text = $"Current status: {OrderStatus.Executing}"
             });
         }
 
@@ -94,6 +110,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 ClientId = order.ClientId,
                 ImplementerId = model.ImplementerId
             });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Login,
+                Subject = "Changing order status  in order №{order.Id}",
+                Text = $"Current status: {OrderStatus.Ready}"
+            });
         }
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -118,6 +140,12 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
                 Status = OrderStatus.Issued,
                 ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Login,
+                Subject = "Changing order status  in order №{order.Id}",
+                Text = $"Current status: {OrderStatus.Issued}"
             });
         }
     }

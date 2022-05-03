@@ -44,6 +44,7 @@ namespace RenovationWorkView
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonOrderIsIssued = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
+            this.messagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,8 @@ namespace RenovationWorkView
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.startWorkingToolStripMenuItem});
+            this.startWorkingToolStripMenuItem,
+            this.messagesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 29);
@@ -76,28 +78,28 @@ namespace RenovationWorkView
             // componentsToolStripMenuItem1
             // 
             this.componentsToolStripMenuItem1.Name = "componentsToolStripMenuItem1";
-            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
+            this.componentsToolStripMenuItem1.Size = new System.Drawing.Size(180, 26);
             this.componentsToolStripMenuItem1.Text = "Components";
             this.componentsToolStripMenuItem1.Click += new System.EventHandler(this.componentsToolStripMenuItem1_Click);
             // 
             // repairsToolStripMenuItem
             // 
             this.repairsToolStripMenuItem.Name = "repairsToolStripMenuItem";
-            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.repairsToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.repairsToolStripMenuItem.Text = "Repairs";
             this.repairsToolStripMenuItem.Click += new System.EventHandler(this.repairsToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.clientsToolStripMenuItem.Text = "Clients";
             this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // implementersToolStripMenuItem
             // 
             this.implementersToolStripMenuItem.Name = "implementersToolStripMenuItem";
-            this.implementersToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.implementersToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.implementersToolStripMenuItem.Text = "Implementers";
             this.implementersToolStripMenuItem.Click += new System.EventHandler(this.implementersToolStripMenuItem_Click);
             // 
@@ -182,6 +184,13 @@ namespace RenovationWorkView
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
+            // messagesToolStripMenuItem
+            // 
+            this.messagesToolStripMenuItem.Name = "messagesToolStripMenuItem";
+            this.messagesToolStripMenuItem.Size = new System.Drawing.Size(70, 25);
+            this.messagesToolStripMenuItem.Text = "Messages";
+            this.messagesToolStripMenuItem.Click += new System.EventHandler(this.messagesToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -221,5 +230,6 @@ namespace RenovationWorkView
         private System.Windows.Forms.ToolStripMenuItem clientsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startWorkingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem implementersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem messagesToolStripMenuItem;
     }
 }

@@ -81,6 +81,33 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.ToTable("Implementers");
                 });
 
+            modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -167,6 +194,15 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.ToTable("RepairComponents");
                 });
 
+            modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("RenovationWorkDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Messages")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("RenovationWorkDatabaseImplement.Models.Client", "Client")
@@ -213,6 +249,8 @@ namespace RenovationWorkDatabaseImplement.Migrations
 
             modelBuilder.Entity("RenovationWorkDatabaseImplement.Models.Client", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("Orders");
                 });
 
