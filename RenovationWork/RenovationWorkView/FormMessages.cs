@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace RenovationWorkView
 {
@@ -32,7 +33,7 @@ namespace RenovationWorkView
             LoadData();
             textBoxPage.Text = "1";
             dataGridView.Columns[0].Visible = false;
-            dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void LoadData()
         {
@@ -86,6 +87,17 @@ namespace RenovationWorkView
                 {
                     buttonPrev.Text = "Prev " + (currentPage);
                 }
+                LoadData();
+            }
+        }
+
+        private void buttonShowMessage_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                var form = Program.Container.Resolve<FormMessage>();
+                form.MessageId = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                form.ShowDialog();
                 LoadData();
             }
         }

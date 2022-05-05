@@ -88,7 +88,9 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     SenderName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateDelivery = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Viewed = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReplyText = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

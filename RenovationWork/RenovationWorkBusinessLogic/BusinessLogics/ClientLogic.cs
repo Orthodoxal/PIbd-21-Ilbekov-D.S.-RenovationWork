@@ -26,7 +26,7 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
             {
                 return _clientStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || !string.IsNullOrEmpty(model.Login))
             {
                 return new List<ClientViewModel> { _clientStorage.GetElement(model) };
             }

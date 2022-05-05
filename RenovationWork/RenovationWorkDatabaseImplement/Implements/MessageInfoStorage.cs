@@ -70,7 +70,8 @@ namespace RenovationWorkDatabaseImplement.Implements
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                Viewed = model.Viewed
             });
             context.SaveChanges();
         }

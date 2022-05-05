@@ -10,7 +10,7 @@ using RenovationWorkDatabaseImplement.Implements;
 namespace RenovationWorkDatabaseImplement.Migrations
 {
     [DbContext(typeof(RenovationWorkDatabase))]
-    [Migration("20220505162831_InitialCreate")]
+    [Migration("20220505203849_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,10 +97,16 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.Property<DateTime>("DateDelivery")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ReplyText")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SenderName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Viewed")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MessageId");

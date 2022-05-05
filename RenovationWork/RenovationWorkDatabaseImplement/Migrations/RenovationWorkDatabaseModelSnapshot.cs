@@ -95,10 +95,16 @@ namespace RenovationWorkDatabaseImplement.Migrations
                     b.Property<DateTime>("DateDelivery")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ReplyText")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SenderName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Viewed")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MessageId");
