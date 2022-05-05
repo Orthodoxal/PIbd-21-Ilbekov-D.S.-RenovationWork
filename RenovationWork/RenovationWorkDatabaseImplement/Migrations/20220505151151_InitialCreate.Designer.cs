@@ -10,7 +10,7 @@ using RenovationWorkDatabaseImplement.Implements;
 namespace RenovationWorkDatabaseImplement.Migrations
 {
     [DbContext(typeof(RenovationWorkDatabase))]
-    [Migration("20220422081853_InitialCreate")]
+    [Migration("20220505151151_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
