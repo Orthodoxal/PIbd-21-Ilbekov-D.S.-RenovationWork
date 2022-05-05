@@ -49,7 +49,7 @@ namespace RenovationWorkView
             this.ClientSize = new System.Drawing.Size(610, 478);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormMessages";
-            this.Text = "FormMessages";
+            this.Text = "Messages";
             this.Load += new System.EventHandler(this.FormMessages_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
