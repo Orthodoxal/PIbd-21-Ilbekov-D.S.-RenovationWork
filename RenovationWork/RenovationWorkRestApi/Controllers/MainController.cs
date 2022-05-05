@@ -17,6 +17,7 @@ namespace RenovationWorkRestApi.Controllers
         private readonly IOrderLogic _order;
         private readonly IRepairLogic _repair;
         private readonly IMessageInfoLogic _message;
+        private readonly int mailsOnPage = 2;
         public MainController(IOrderLogic order, IRepairLogic repair, IMessageInfoLogic message)
         {
             _order = order;
@@ -30,7 +31,17 @@ namespace RenovationWorkRestApi.Controllers
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel { ClientId = clientId });
         [HttpGet]
-        public List<MessageInfoViewModel> GetMessages(int clientId) => _message.Read(new MessageInfoBindingModel { ClientId = clientId });
+        [HttpGet]
+        public (List<MessageInfoViewModel>, bool) GetMessages(int clientId, int page)
+        {
+            var list = _message.Read(new MessageInfoBindingModel {
+                ClientId = clientId,
+                ToSkip = (page - 1) * mailsOnPage,
+                ToTake = mailsOnPage + 1 })
+                .ToList();
+            var hasNext = !(list.Count() <= mailsOnPage);
+            return (list.Take(mailsOnPage).ToList(), hasNext);
+        }
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) => _order.CreateOrder(model);
     }

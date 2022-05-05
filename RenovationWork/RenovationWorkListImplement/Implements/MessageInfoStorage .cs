@@ -33,13 +33,33 @@ namespace RenovationWorkListImplement.Implements
             {
                 return null;
             }
+            int toSkip = model.ToSkip ?? 0;
+            int toTake = model.ToTake ?? source.Messages.Count;
             var result = new List<MessageInfoViewModel>();
+            if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
+            {
+                foreach (var msg in source.Messages)
+                {
+                    if (toSkip > 0) { toSkip--; continue; }
+                    if (toTake > 0)
+                    {
+                        result.Add(CreateModel(msg));
+                        toTake--;
+                    }
+                }
+                return result;
+            }
             foreach (var message in source.Messages)
             {
                 if ((model.ClientId.HasValue && message.ClientId == model.ClientId) ||
                     (!model.ClientId.HasValue && message.DateDelivery.Date == model.DateDelivery.Date))
                 {
-                    result.Add(CreateModel(message));
+                    if (toSkip > 0) { toSkip--; continue; }
+                    if (toTake > 0)
+                    {
+                        result.Add(CreateModel(message));
+                        toTake--;
+                    }
                 }
             }
             return result;

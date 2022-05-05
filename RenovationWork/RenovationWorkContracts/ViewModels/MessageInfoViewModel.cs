@@ -18,5 +18,9 @@ namespace RenovationWorkContracts.ViewModels
         public string Subject { get; set; }
         [DisplayName("Text")]
         public string Body { get; set; }
+        [DisplayName("Viewed")]
+        public string Viewed { get; set; }
+        [DisplayName("Reply Text")]
+        public string ReplyText { get; set; }
     }
 }

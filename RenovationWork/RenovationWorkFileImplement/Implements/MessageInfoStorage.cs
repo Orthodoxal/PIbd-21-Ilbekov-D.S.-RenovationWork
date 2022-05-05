@@ -19,14 +19,9 @@ namespace RenovationWorkFileImplement.Implements
         }
         public List<MessageInfoViewModel> GetFullList()
         {
-            return source.Messages.Select(rec => new MessageInfoViewModel
-            {
-                MessageId = rec.MessageId,
-                Body = rec.Body,
-                Subject = rec.Subject,
-                DateDelivery = rec.DateDelivery,
-                SenderName = rec.SenderName
-            }).ToList();
+            return source.Messages
+                .Select(CreateModel)
+                .ToList();
         }
         public List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model)
         {
@@ -34,16 +29,17 @@ namespace RenovationWorkFileImplement.Implements
             {
                 return null;
             }
+            if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
+            {
+                return source.Messages.Skip((int)model.ToSkip).Take((int)model.ToTake)
+                .Select(CreateModel).ToList();
+            }
             return source.Messages.Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
                 (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
-                .Select(rec => new MessageInfoViewModel
-                {
-                    MessageId = rec.MessageId,
-                    SenderName = rec.SenderName,
-                    DateDelivery = rec.DateDelivery,
-                    Subject = rec.Subject,
-                    Body = rec.Body
-                }).ToList();
+                .Skip(model.ToSkip ?? 0)
+                .Take(model.ToTake ?? source.Messages.Count())
+                .Select(CreateModel)
+                .ToList();
         }
         public void Insert(MessageInfoBindingModel model)
         {
@@ -55,12 +51,23 @@ namespace RenovationWorkFileImplement.Implements
             source.Messages.Add(new MessageInfo
             {
                 MessageId = model.MessageId,
-                ClientId = model.ClientId,
+                ClientId = model.ClientId != null ? model.ClientId : source.Clients.FirstOrDefault(rec => rec.Login == model.FromMailAddress)?.Id,
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
                 Body = model.Body
             });
+        }
+        private MessageInfoViewModel CreateModel(MessageInfo model)
+        {
+            return new MessageInfoViewModel
+            {
+                MessageId = model.MessageId,
+                SenderName = model.SenderName,
+                DateDelivery = model.DateDelivery,
+                Subject = model.Subject,
+                Body = model.Body
+            };
         }
     }
 }
