@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkDatabaseImple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkRestApi", "RenovationWorkRestApi\RenovationWorkRestApi.csproj", "{50164C65-2E32-4B4B-8987-42A46A11C8DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenovationWorkClientApp", "RenovationWorkClientApp\RenovationWorkClientApp.csproj", "{9F499984-4634-430F-B736-24834925C160}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkClientApp", "RenovationWorkClientApp\RenovationWorkClientApp.csproj", "{9F499984-4634-430F-B736-24834925C160}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenovationWorkWarehouseApp", "RenovationWorkWarehouseApp\RenovationWorkWarehouseApp.csproj", "{4DA0853B-9D18-430D-B46C-D28C65F1E0D2}"
 EndProject

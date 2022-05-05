@@ -176,5 +176,11 @@ namespace RenovationWorkView
         {            
             _workProcess.DoWork(_implementerLogic, _orderLogic);
         }
+
+        private void messagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
     }
 }

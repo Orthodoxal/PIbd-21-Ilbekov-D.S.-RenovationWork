@@ -16,10 +16,12 @@ namespace RenovationWorkRestApi.Controllers
     {
         private readonly IOrderLogic _order;
         private readonly IRepairLogic _repair;
-        public MainController(IOrderLogic order, IRepairLogic repair)
+        private readonly IMessageInfoLogic _message;
+        public MainController(IOrderLogic order, IRepairLogic repair, IMessageInfoLogic message)
         {
             _order = order;
             _repair = repair;
+            _message = message;
         }
         [HttpGet]
         public List<RepairViewModel> GetRepairList() => _repair.Read(null)?.ToList();
@@ -27,6 +29,8 @@ namespace RenovationWorkRestApi.Controllers
         public RepairViewModel GetRepair(int repairId) => _repair.Read(new RepairBindingModel { Id = repairId })?[0];
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel { ClientId = clientId });
+        [HttpGet]
+        public List<MessageInfoViewModel> GetMessages(int clientId) => _message.Read(new MessageInfoBindingModel { ClientId = clientId });
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) => _order.CreateOrder(model);
     }
