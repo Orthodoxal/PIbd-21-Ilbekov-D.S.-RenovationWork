@@ -14,5 +14,7 @@ namespace RenovationWorkFileImplement.Models
         public DateTime DateDelivery { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public string Viewed { get; set; }
+        public string ReplyText { get; set; }
     }
 }

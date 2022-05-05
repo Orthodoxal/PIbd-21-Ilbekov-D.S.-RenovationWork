@@ -27,7 +27,18 @@ namespace RenovationWorkBusinessLogic.BusinessLogics
         }
         public void CreateOrUpdate(MessageInfoBindingModel model)
         {
-            _messageInfoStorage.Insert(model);
+            var element = _messageInfoStorage.GetElement(new MessageInfoBindingModel
+            {
+                MessageId = model.MessageId
+            });
+            if (element != null)
+            {
+                _messageInfoStorage.Update(model);
+            }
+            else
+            {
+                _messageInfoStorage.Insert(model);
+            }
         }
     }
 }

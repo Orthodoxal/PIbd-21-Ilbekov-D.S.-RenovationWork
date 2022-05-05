@@ -41,6 +41,16 @@ namespace RenovationWorkFileImplement.Implements
                 .Select(CreateModel)
                 .ToList();
         }
+        public MessageInfoViewModel GetElement(MessageInfoBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            var message = source.Messages
+                .FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            return message != null ? CreateModel(message) : null;
+        }
         public void Insert(MessageInfoBindingModel model)
         {
             MessageInfo element = source.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
@@ -58,6 +68,15 @@ namespace RenovationWorkFileImplement.Implements
                 Body = model.Body
             });
         }
+        public void Update(MessageInfoBindingModel model)
+        {
+            var element = source.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            if (element == null)
+            {
+                throw new Exception("Element is not found");
+            }
+            CreateModel(model, element);
+        }
         private MessageInfoViewModel CreateModel(MessageInfo model)
         {
             return new MessageInfoViewModel
@@ -68,6 +87,17 @@ namespace RenovationWorkFileImplement.Implements
                 Subject = model.Subject,
                 Body = model.Body
             };
+        }
+        private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo message)
+        {
+            message.MessageId = model.MessageId;
+            message.Body = model.Body;
+            message.ClientId = model.ClientId;
+            message.DateDelivery = model.DateDelivery;
+            message.Subject = model.Subject;
+            message.ReplyText = model.ReplyText;
+            message.Viewed = model.Viewed;
+            return message;
         }
     }
 }

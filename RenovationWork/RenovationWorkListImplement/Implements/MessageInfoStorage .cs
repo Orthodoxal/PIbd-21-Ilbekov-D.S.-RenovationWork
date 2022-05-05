@@ -64,9 +64,41 @@ namespace RenovationWorkListImplement.Implements
             }
             return result;
         }
+        public MessageInfoViewModel GetElement(MessageInfoBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            foreach (var message in source.Messages)
+            {
+                if (message.MessageId == model.MessageId)
+                {
+                    return CreateModel(message);
+                }
+            }
+            return null;
+        }
         public void Insert(MessageInfoBindingModel model)
         {
             source.Messages.Add(CreateModel(model, new MessageInfo()));
+        }
+        public void Update(MessageInfoBindingModel model)
+        {
+            MessageInfo tempMessage = null;
+            foreach (var message in source.Messages)
+            {
+                if (message.MessageId == model.MessageId)
+                {
+                    tempMessage = message;
+                    break;
+                }
+            }
+            if (tempMessage == null)
+            {
+                throw new Exception("Element is not found");
+            }
+            CreateModel(model, tempMessage);
         }
         private MessageInfo CreateModel(MessageInfoBindingModel model,
             MessageInfo message)
@@ -86,6 +118,8 @@ namespace RenovationWorkListImplement.Implements
             message.ClientId = model.ClientId;
             message.DateDelivery = model.DateDelivery;
             message.Subject = model.Subject;
+            message.ReplyText = model.ReplyText;
+            message.Viewed = model.Viewed;
             return message;
         }
         private MessageInfoViewModel CreateModel(MessageInfo message)

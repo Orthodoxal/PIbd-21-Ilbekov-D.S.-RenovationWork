@@ -44,6 +44,17 @@ namespace RenovationWorkDatabaseImplement.Implements
                 .Select(CreateModel)
                 .ToList();
         }
+        public MessageInfoViewModel GetElement(MessageInfoBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using var context = new RenovationWorkDatabase();
+            var message = context.Messages
+                .FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            return message != null ? CreateModel(message) : null;
+        }
         public void Insert(MessageInfoBindingModel model)
         {
             using var context = new RenovationWorkDatabase();
@@ -63,6 +74,27 @@ namespace RenovationWorkDatabaseImplement.Implements
             });
             context.SaveChanges();
         }
+        public void Update(MessageInfoBindingModel model) 
+        {
+            using var context = new RenovationWorkDatabase();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                var element = context.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+                if (element == null)
+                {
+                    throw new Exception("Element is not found");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
         private MessageInfoViewModel CreateModel(MessageInfo model)
         {
             return new MessageInfoViewModel
@@ -71,8 +103,21 @@ namespace RenovationWorkDatabaseImplement.Implements
                 SenderName = model.SenderName,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                Viewed = model.Viewed,
+                ReplyText = model.ReplyText
             };
+        }
+        private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo message)
+        {
+            message.MessageId = model.MessageId;
+            message.ClientId = model.ClientId;
+            message.Subject = model.Subject;
+            message.Body = model.Body;
+            message.DateDelivery = model.DateDelivery;
+            message.ReplyText = model.ReplyText;
+            message.Viewed = model.Viewed;
+            return message;
         }
     }
 }

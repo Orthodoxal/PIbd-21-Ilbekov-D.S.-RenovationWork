@@ -17,6 +17,8 @@ namespace RenovationWorkContracts.BindingModels
         public string FromMailAddress { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public string Viewed { get; set; }
+        public string ReplyText { get; set; }
         public DateTime DateDelivery { get; set; }
         [DataMember]
         public int? ToSkip { get; set; }
