@@ -224,7 +224,9 @@ namespace RenovationWorkFileImplement
                         Body = elem.Element("Body").Value,
                         SenderName = elem.Element("SenderName").Value,
                         Subject = elem.Element("Subject").Value,
-                        DateDelivery = DateTime.Parse(elem.Element("DateDelivery").Value)
+                        DateDelivery = DateTime.Parse(elem.Element("DateDelivery").Value),
+                        Viewed = elem.Element("Viewed").Value,
+                        ReplyText = elem.Element("ReplyText").Value
                     });
                 }
             }
@@ -359,7 +361,9 @@ namespace RenovationWorkFileImplement
                         new XElement("SenderName", message.SenderName),
                         new XElement("Subject", message.Subject),
                         new XElement("Body", message.Body),
-                        new XElement("DateDelivery", message.DateDelivery)));
+                        new XElement("DateDelivery", message.DateDelivery),
+                        new XElement("Viewed", message.Viewed),
+                        new XElement("ReplyText", message.ReplyText)));
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);

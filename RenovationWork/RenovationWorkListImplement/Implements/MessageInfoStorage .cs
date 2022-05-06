@@ -119,7 +119,9 @@ namespace RenovationWorkListImplement.Implements
                 Body = message.Body,
                 DateDelivery = message.DateDelivery,
                 SenderName = message.SenderName,
-                Subject = message.Subject
+                Subject = message.Subject,
+                Viewed = message.Viewed,
+                ReplyText = message.ReplyText
             };
         }
     }

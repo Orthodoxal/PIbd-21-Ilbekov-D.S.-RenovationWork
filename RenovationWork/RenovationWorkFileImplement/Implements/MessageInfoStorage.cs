@@ -62,7 +62,8 @@ namespace RenovationWorkFileImplement.Implements
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                Viewed = model.Viewed
             });
         }
         public void Update(MessageInfoBindingModel model)
@@ -82,7 +83,9 @@ namespace RenovationWorkFileImplement.Implements
                 SenderName = model.SenderName,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                Viewed = model.Viewed,
+                ReplyText = model.ReplyText
             };
         }
         private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo message)
@@ -94,6 +97,7 @@ namespace RenovationWorkFileImplement.Implements
             message.Subject = model.Subject;
             message.ReplyText = model.ReplyText;
             message.Viewed = model.Viewed;
+            message.ReplyText = model.ReplyText;
             return message;
         }
     }
