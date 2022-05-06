@@ -26,15 +26,10 @@ namespace RenovationWorkDatabaseImplement.Implements
                 return null;
             }
             using var context = new RenovationWorkDatabase();
-            if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
-            {
-                return context.Messages
-                    .Skip((int)model.ToSkip)
-                    .Take((int)model.ToTake)
-                    .Select(CreateModel).ToList();
-            }
-            return context.Messages.Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
-                (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
+            return context.Messages.Where(rec => model.ClientId.HasValue ? 
+                (rec.ClientId == model.ClientId) 
+                : 
+                (model.ToSkip.HasValue && model.ToTake.HasValue || rec.DateDelivery.Date == model.DateDelivery.Date))
                 .Skip(model.ToSkip ?? 0)
                 .Take(model.ToTake ?? context.Messages.Count())
                 .Select(CreateModel)

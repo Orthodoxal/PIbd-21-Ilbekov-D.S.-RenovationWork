@@ -31,7 +31,7 @@ namespace RenovationWorkView
         private void FormMessages_Load(object sender, EventArgs e)
         {
             LoadData();
-            textBoxPage.Text = "1";
+            labelPage.Text = "1";
             dataGridView.Columns[0].Visible = false;
             dataGridView.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
@@ -63,7 +63,7 @@ namespace RenovationWorkView
             if (hasNext)
             {
                 currentPage++;
-                textBoxPage.Text = (currentPage + 1).ToString();
+                labelPage.Text = (currentPage + 1).ToString();
                 buttonPrev.Enabled = true;
                 buttonPrev.Text = "Prev " + (currentPage);
                 LoadData();
@@ -75,7 +75,7 @@ namespace RenovationWorkView
             if ((currentPage - 1) >= 0)
             {
                 currentPage--;
-                textBoxPage.Text = (currentPage + 1).ToString();
+                labelPage.Text = (currentPage + 1).ToString();
                 buttonNext.Enabled = true;
                 buttonNext.Text = "Next " + (currentPage + 2);
                 if (currentPage == 0)

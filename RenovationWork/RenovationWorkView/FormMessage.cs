@@ -60,7 +60,7 @@ namespace RenovationWorkView
                         labelBody.Text = view.Body;
                         labelSenderEmail.Text = view.SenderName;
                         labelSubjectText.Text = view.Subject;
-                        textBoxDateDelivery.Text = view.DateDelivery.ToString();
+                        labelDateDelivery.Text = view.DateDelivery.ToString();
                         textBoxReplyText.Text = view.ReplyText;
                     }
                 }
@@ -100,7 +100,7 @@ namespace RenovationWorkView
                     FromMailAddress = labelSenderEmail.Text,
                     Subject = labelSubjectText.Text,
                     Body = labelBody.Text,
-                    DateDelivery = DateTime.Parse(textBoxDateDelivery.Text),
+                    DateDelivery = DateTime.Parse(labelDateDelivery.Text),
                     Viewed = "Yes",
                     ReplyText = textBoxReplyText.Text
                 });

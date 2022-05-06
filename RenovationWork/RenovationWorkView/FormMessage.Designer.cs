@@ -34,10 +34,10 @@
             this.textBoxReplyText = new System.Windows.Forms.TextBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonReply = new System.Windows.Forms.Button();
-            this.textBoxDateDelivery = new System.Windows.Forms.TextBox();
             this.labelSender = new System.Windows.Forms.Label();
             this.labelSubject = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
+            this.labelDateDelivery = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelSenderEmail
@@ -97,14 +97,6 @@
             this.buttonReply.UseVisualStyleBackColor = true;
             this.buttonReply.Click += new System.EventHandler(this.buttonReply_Click);
             // 
-            // textBoxDateDelivery
-            // 
-            this.textBoxDateDelivery.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDateDelivery.Location = new System.Drawing.Point(576, 9);
-            this.textBoxDateDelivery.Name = "textBoxDateDelivery";
-            this.textBoxDateDelivery.Size = new System.Drawing.Size(212, 29);
-            this.textBoxDateDelivery.TabIndex = 6;
-            // 
             // labelSender
             // 
             this.labelSender.AutoSize = true;
@@ -135,15 +127,24 @@
             this.labelDate.TabIndex = 9;
             this.labelDate.Text = "Date: ";
             // 
+            // labelDateDelivery
+            // 
+            this.labelDateDelivery.AutoSize = true;
+            this.labelDateDelivery.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelDateDelivery.Location = new System.Drawing.Point(576, 16);
+            this.labelDateDelivery.Name = "labelDateDelivery";
+            this.labelDateDelivery.Size = new System.Drawing.Size(0, 21);
+            this.labelDateDelivery.TabIndex = 10;
+            // 
             // FormMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 393);
+            this.Controls.Add(this.labelDateDelivery);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelSubject);
             this.Controls.Add(this.labelSender);
-            this.Controls.Add(this.textBoxDateDelivery);
             this.Controls.Add(this.buttonReply);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxReplyText);
@@ -166,9 +167,9 @@
         private System.Windows.Forms.TextBox textBoxReplyText;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonReply;
-        private System.Windows.Forms.TextBox textBoxDateDelivery;
         private System.Windows.Forms.Label labelSender;
         private System.Windows.Forms.Label labelSubject;
         private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Label labelDateDelivery;
     }
 }

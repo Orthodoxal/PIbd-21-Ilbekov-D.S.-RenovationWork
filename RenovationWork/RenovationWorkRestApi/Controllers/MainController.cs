@@ -31,7 +31,6 @@ namespace RenovationWorkRestApi.Controllers
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel { ClientId = clientId });
         [HttpGet]
-        [HttpGet]
         public (List<MessageInfoViewModel>, bool) GetMessages(int clientId, int page)
         {
             var list = _message.Read(new MessageInfoBindingModel {

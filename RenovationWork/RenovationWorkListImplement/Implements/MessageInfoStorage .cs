@@ -36,23 +36,12 @@ namespace RenovationWorkListImplement.Implements
             int toSkip = model.ToSkip ?? 0;
             int toTake = model.ToTake ?? source.Messages.Count;
             var result = new List<MessageInfoViewModel>();
-            if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
-            {
-                foreach (var msg in source.Messages)
-                {
-                    if (toSkip > 0) { toSkip--; continue; }
-                    if (toTake > 0)
-                    {
-                        result.Add(CreateModel(msg));
-                        toTake--;
-                    }
-                }
-                return result;
-            }
             foreach (var message in source.Messages)
             {
-                if ((model.ClientId.HasValue && message.ClientId == model.ClientId) ||
-                    (!model.ClientId.HasValue && message.DateDelivery.Date == model.DateDelivery.Date))
+                if (model.ClientId.HasValue ? 
+                    (message.ClientId == model.ClientId)
+                    : 
+                    (model.ToSkip.HasValue && model.ToTake.HasValue || message.DateDelivery.Date == model.DateDelivery.Date))
                 {
                     if (toSkip > 0) { toSkip--; continue; }
                     if (toTake > 0)
@@ -108,7 +97,7 @@ namespace RenovationWorkListImplement.Implements
             {
                 if (client.Id == model.ClientId)
                 {
-                    clientName = client.Fullname;
+                    clientName = client.Login;
                     break;
                 }
             }
