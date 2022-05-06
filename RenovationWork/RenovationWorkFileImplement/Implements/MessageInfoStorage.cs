@@ -31,8 +31,10 @@ namespace RenovationWorkFileImplement.Implements
             }
             if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
             {
-                return source.Messages.Skip((int)model.ToSkip).Take((int)model.ToTake)
-                .Select(CreateModel).ToList();
+                return source.Messages
+                    .Skip((int)model.ToSkip)
+                    .Take((int)model.ToTake)
+                    .Select(CreateModel).ToList();
             }
             return source.Messages.Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
                 (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
