@@ -14,21 +14,21 @@ namespace RenovationWorkView
 {
     public partial class FormClients : Form
     {
-        private readonly IClientLogic logic;
+        private readonly IClientLogic _logic;
         public FormClients(IClientLogic logic)
         {
-            this.logic = logic;
+            _logic = logic;
             InitializeComponent();
         }
         private void LoadData()
         {
-            var list = logic.Read(null);
-            if (list != null)
+            try
             {
-                dataGridView.DataSource = list;
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(_logic.Read(null), dataGridView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void FormClients_Load(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace RenovationWorkView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new ClientBindingModel { Id = id });
+                        _logic.Delete(new ClientBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

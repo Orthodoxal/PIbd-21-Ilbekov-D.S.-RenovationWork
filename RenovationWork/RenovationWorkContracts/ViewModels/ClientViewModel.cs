@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenovationWorkContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace RenovationWorkContracts.ViewModels
     public class ClientViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Client fullname")]
+        [Column(title: "Client fullname", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Fullname { get; set; }
-        [DisplayName("Client login")]
+        [Column(title: "Client login", width: 150)]
         public string Login { get; set; }
-        [DisplayName("Client password")]
+        [Column(title: "Client password", width: 100)]
         public string Password { get; set; }
     }
 }

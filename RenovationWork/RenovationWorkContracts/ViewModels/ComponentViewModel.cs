@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenovationWorkContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace RenovationWorkContracts.ViewModels
     public class ComponentViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Component Name")]
+        [Column(title: "Component Name", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ComponentName { get; set; }
     }
 

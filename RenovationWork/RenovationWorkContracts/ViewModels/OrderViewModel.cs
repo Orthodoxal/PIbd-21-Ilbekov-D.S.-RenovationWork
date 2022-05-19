@@ -1,4 +1,5 @@
-﻿using RenovationWorkContracts.Enums;
+﻿using RenovationWorkContracts.Attributes;
+using RenovationWorkContracts.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,21 +18,21 @@ namespace RenovationWorkContracts.ViewModels
         public int RepairId { get; set; }
         public int ClientId { get; set; }
         public int? ImplementerId { get; set; }
-        [DisplayName("Implementer fullname")]
+        [Column(title: "Implementer fullname", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFullname{ get; set; }
-        [DisplayName("Client fullname")]
+        [Column(title: "Client fullname", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ClientFullname { get; set; }
-        [DisplayName("Repair")]
+        [Column(title: "Repair", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string RepairName { get; set; }
-        [DisplayName("Amount")]
+        [Column(title: "Amount", width: 60)]
         public int Count { get; set; }
-        [DisplayName("Total")]
+        [Column(title: "Total", width: 50)]
         public decimal Sum { get; set; }
-        [DisplayName("Status")]
+        [Column(title: "Status", width: 50)]
         public OrderStatus Status { get; set; }
-        [DisplayName("Date Create")]
+        [Column(title: "Date Create", gridViewAutoSize: GridViewAutoSize.Fill)]
         public DateTime DateCreate { get; set; }
-        [DisplayName("Date Implement")]
+        [Column(title: "Date Implement", gridViewAutoSize: GridViewAutoSize.Fill)]
         public DateTime? DateImplement { get; set; }
     }
 }

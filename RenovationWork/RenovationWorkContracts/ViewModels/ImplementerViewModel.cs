@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenovationWorkContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace RenovationWorkContracts.ViewModels
     public class ImplementerViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Implementer fullname")]
+        [Column(title: "Implementer fullname", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Fullname { get; set; }
-        [DisplayName("Implementer working time")]
+        [Column(title: "Implementer working time", width: 70)]
         public int WorkingTime { get; set; }
-        [DisplayName("Implementer relaxing time")]
+        [Column(title: "Implementer relaxing time", width: 70)]
         public int PauseTime { get; set; }
     }
 }

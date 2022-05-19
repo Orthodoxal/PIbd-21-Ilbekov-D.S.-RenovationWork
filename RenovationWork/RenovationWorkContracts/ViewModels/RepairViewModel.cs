@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenovationWorkContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace RenovationWorkContracts.ViewModels
     public class RepairViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Repair name")]
+        [Column(title: "Repair name", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string RepairName { get; set; }
-        [DisplayName("Price")]
+        [Column(title: "Price", width: 100)]
         public decimal Price { get; set; }
         public Dictionary<int, (string, int)> RepairComponents { get; set; }
     }
