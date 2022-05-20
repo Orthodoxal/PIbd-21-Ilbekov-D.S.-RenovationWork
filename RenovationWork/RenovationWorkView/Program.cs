@@ -112,14 +112,12 @@ namespace RenovationWorkView
             grid.Columns.Clear();
             foreach (var prop in type.GetProperties())
             {
-                // получаем список атрибутов
                 var attributes =
                 prop.GetCustomAttributes(typeof(ColumnAttribute), true);
                 if (attributes != null && attributes.Length > 0)
                 {
                     foreach (var attr in attributes)
                     {
-                        // ищем нужный нам атрибут
                         if (attr is ColumnAttribute columnAttr)
                         {
                             config.Add(prop.Name);
@@ -142,7 +140,6 @@ namespace RenovationWorkView
                     }
                 }
             }
-            // добавляем строки
             foreach (var elem in data)
             {
                 var objs = new List<object>();
