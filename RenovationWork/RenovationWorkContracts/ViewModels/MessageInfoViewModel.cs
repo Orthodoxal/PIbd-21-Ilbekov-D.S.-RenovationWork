@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenovationWorkContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace RenovationWorkContracts.ViewModels
     public class MessageInfoViewModel
     {
         public string MessageId { get; set; }
-        [DisplayName("Sender")]
+        [Column(title: "Sender", width: 100)]
         public string SenderName { get; set; }
-        [DisplayName("Date")]
+        [Column(title: "Date", width: 100)]
         public DateTime DateDelivery { get; set; }
-        [DisplayName("Header")]
+        [Column(title: "Header", width: 100)]
         public string Subject { get; set; }
-        [DisplayName("Text")]
+        [Column(title: "Text", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Body { get; set; }
     }
 }
